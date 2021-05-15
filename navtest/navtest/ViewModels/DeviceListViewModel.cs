@@ -24,6 +24,13 @@ namespace navtest.ViewModels
             }
         }
 
+        public void setRefresh()
+        {
+            System.Diagnostics.Debug.WriteLine("Listview binding refresh!");
+            _isRefreshing = true;
+            RaisePropertyChanged();
+        }
+
         public Command RefreshCommand { get; set; }
 
         public DeviceListViewModel()
@@ -33,7 +40,8 @@ namespace navtest.ViewModels
 
         private void OnRefresh()
         {
-            MainPage.bleScan();
+            //MainPage.bleScan();
+            System.Diagnostics.Debug.WriteLine("¨Pull down refresh!");
         }
         protected void RaisePropertyChanged([CallerMemberName] string caller = "")
         {

@@ -17,15 +17,19 @@ using Plugin.BLE.Abstractions.Exceptions;
 
 using System.Diagnostics;
 
+using static navtest.ViewModels.DeviceListViewModel;
+using navtest.ViewModels;
+
 namespace navtest
 {
     public partial class MainPage : ContentPage
     {
-        static IBluetoothLE ble;
-        static IAdapter adapter;
-        static ObservableCollection<IDevice> deviceList;
-        static IDevice device;
-        static Button btnScanCode;
+        IBluetoothLE ble;
+        IAdapter adapter;
+        ObservableCollection<IDevice> deviceList;
+        IDevice device;
+        Button btnScanCode;
+        DeviceListViewModel test;
 
         public MainPage()
         {
@@ -44,6 +48,9 @@ namespace navtest
 
             // buttons
             btnScanCode = this.FindByName<Button>("btnScan");
+
+            // device list model
+            test = new DeviceListViewModel();
         }
 
         private void OnStateChanged(object sender, BluetoothStateChangedArgs e)
@@ -73,10 +80,11 @@ namespace navtest
         }
         private void btn_startScan(object sender, EventArgs e)
         {
+            test.setRefresh();
             bleScan();
         }
 
-        public static async void bleScan()
+        public async void bleScan()
         {
             var state = ble.State;
 

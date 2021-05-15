@@ -13,7 +13,7 @@
 
         <Button Grid.Row="0" Text="Scan" Clicked="btn_startScan" x:Name="btnScan" />
 
-		<ListView Grid.Row="1" x:Name="lv" ItemSelected="lv_ItemSelected" IsPullToRefreshEnabled="true">
+		<ListView Grid.Row="1" x:Name="lv" ItemSelected="lv_ItemSelected" IsPullToRefreshEnabled="{Binding IsRefreshing}">
 			<ListView.ItemTemplate>
 				<DataTemplate>
 					<ViewCell>
