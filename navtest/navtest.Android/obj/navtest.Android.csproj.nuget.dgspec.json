@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\nico1\\source\\repos\\navtest\\navtest\\navtest.Android\\navtest.Android.csproj": {}
+    "C:\\Users\\nico1\\OneDrive\\Documents\\GitHub\\XAMARIN_WS2812B\\navtest\\navtest.Android\\navtest.Android.csproj": {}
   },
   "projects": {
-    "C:\\Users\\nico1\\source\\repos\\navtest\\navtest\\navtest.Android\\navtest.Android.csproj": {
+    "C:\\Users\\nico1\\OneDrive\\Documents\\GitHub\\XAMARIN_WS2812B\\navtest\\navtest.Android\\navtest.Android.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\nico1\\source\\repos\\navtest\\navtest\\navtest.Android\\navtest.Android.csproj",
+        "projectUniqueName": "C:\\Users\\nico1\\OneDrive\\Documents\\GitHub\\XAMARIN_WS2812B\\navtest\\navtest.Android\\navtest.Android.csproj",
         "projectName": "navtest.Android",
-        "projectPath": "C:\\Users\\nico1\\source\\repos\\navtest\\navtest\\navtest.Android\\navtest.Android.csproj",
+        "projectPath": "C:\\Users\\nico1\\OneDrive\\Documents\\GitHub\\XAMARIN_WS2812B\\navtest\\navtest.Android\\navtest.Android.csproj",
         "packagesPath": "C:\\Users\\nico1\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\nico1\\source\\repos\\navtest\\navtest\\navtest.Android\\obj\\",
+        "outputPath": "C:\\Users\\nico1\\OneDrive\\Documents\\GitHub\\XAMARIN_WS2812B\\navtest\\navtest.Android\\obj\\",
         "projectStyle": "PackageReference",
         "skipContentFileWrite": true,
         "fallbackFolders": [
@@ -32,8 +32,8 @@
         "frameworks": {
           "monoandroid11.0": {
             "projectReferences": {
-              "C:\\Users\\nico1\\source\\repos\\navtest\\navtest\\navtest\\navtest.csproj": {
-                "projectPath": "C:\\Users\\nico1\\source\\repos\\navtest\\navtest\\navtest\\navtest.csproj"
+              "C:\\Users\\nico1\\OneDrive\\Documents\\GitHub\\XAMARIN_WS2812B\\navtest\\navtest\\navtest.csproj": {
+                "projectPath": "C:\\Users\\nico1\\OneDrive\\Documents\\GitHub\\XAMARIN_WS2812B\\navtest\\navtest\\navtest.csproj"
               }
             }
           }
@@ -58,14 +58,14 @@
         }
       }
     },
-    "C:\\Users\\nico1\\source\\repos\\navtest\\navtest\\navtest\\navtest.csproj": {
+    "C:\\Users\\nico1\\OneDrive\\Documents\\GitHub\\XAMARIN_WS2812B\\navtest\\navtest\\navtest.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\nico1\\source\\repos\\navtest\\navtest\\navtest\\navtest.csproj",
+        "projectUniqueName": "C:\\Users\\nico1\\OneDrive\\Documents\\GitHub\\XAMARIN_WS2812B\\navtest\\navtest\\navtest.csproj",
         "projectName": "navtest",
-        "projectPath": "C:\\Users\\nico1\\source\\repos\\navtest\\navtest\\navtest\\navtest.csproj",
+        "projectPath": "C:\\Users\\nico1\\OneDrive\\Documents\\GitHub\\XAMARIN_WS2812B\\navtest\\navtest\\navtest.csproj",
         "packagesPath": "C:\\Users\\nico1\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\nico1\\source\\repos\\navtest\\navtest\\navtest\\obj\\",
+        "outputPath": "C:\\Users\\nico1\\OneDrive\\Documents\\GitHub\\XAMARIN_WS2812B\\navtest\\navtest\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"

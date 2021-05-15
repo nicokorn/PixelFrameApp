@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "JsX4lFBUWK/vEcMxf+cHcWO7AbMKi9BEoj1ZfIQRETauDjBAlmE4tUvDabPqBO3i4V7RBPYx2Y/gVpWj15+7hA==",
+  "dgSpecHash": "oyn+9Aams6dcYwV7mGLi3DyK+NR33U0m4OfDxC6io/HyZqVUuP5YnsBUJib/8uI8aMxHtLVdlLtubeA5yUI8eQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\nico1\\source\\repos\\navtest\\navtest\\navtest.iOS\\navtest.iOS.csproj",
+  "projectFilePath": "C:\\Users\\nico1\\OneDrive\\Documents\\GitHub\\XAMARIN_WS2812B\\navtest\\navtest.iOS\\navtest.iOS.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\nico1\\.nuget\\packages\\plugin.ble\\2.1.2\\plugin.ble.2.1.2.nupkg.sha512",
     "C:\\Users\\nico1\\.nuget\\packages\\system.numerics.vectors\\4.5.0\\system.numerics.vectors.4.5.0.nupkg.sha512",

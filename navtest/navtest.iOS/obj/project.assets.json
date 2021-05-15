@@ -1082,11 +1082,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\nico1\\source\\repos\\navtest\\navtest\\navtest.iOS\\navtest.iOS.csproj",
+      "projectUniqueName": "C:\\Users\\nico1\\OneDrive\\Documents\\GitHub\\XAMARIN_WS2812B\\navtest\\navtest.iOS\\navtest.iOS.csproj",
       "projectName": "navtest.iOS",
-      "projectPath": "C:\\Users\\nico1\\source\\repos\\navtest\\navtest\\navtest.iOS\\navtest.iOS.csproj",
+      "projectPath": "C:\\Users\\nico1\\OneDrive\\Documents\\GitHub\\XAMARIN_WS2812B\\navtest\\navtest.iOS\\navtest.iOS.csproj",
       "packagesPath": "C:\\Users\\nico1\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\nico1\\source\\repos\\navtest\\navtest\\navtest.iOS\\obj\\",
+      "outputPath": "C:\\Users\\nico1\\OneDrive\\Documents\\GitHub\\XAMARIN_WS2812B\\navtest\\navtest.iOS\\obj\\",
       "projectStyle": "PackageReference",
       "skipContentFileWrite": true,
       "fallbackFolders": [
@@ -1107,8 +1107,8 @@
       "frameworks": {
         "xamarinios10": {
           "projectReferences": {
-            "C:\\Users\\nico1\\source\\repos\\navtest\\navtest\\navtest\\navtest.csproj": {
-              "projectPath": "C:\\Users\\nico1\\source\\repos\\navtest\\navtest\\navtest\\navtest.csproj"
+            "C:\\Users\\nico1\\OneDrive\\Documents\\GitHub\\XAMARIN_WS2812B\\navtest\\navtest\\navtest.csproj": {
+              "projectPath": "C:\\Users\\nico1\\OneDrive\\Documents\\GitHub\\XAMARIN_WS2812B\\navtest\\navtest\\navtest.csproj"
             }
           }
         }

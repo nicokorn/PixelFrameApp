@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "XT0ugdnl+EwGhSnKTgGIv9Fvm5ujRrGChrqQ14Gg1HCM0O5Uqy3T9VJC62LNKKUwTniB/w9qwBgvN53TebQa2Q==",
+  "dgSpecHash": "zHd/JzqMXDwAeO0Rlt1FRQGB01uevG0/0UHMye3l6BMo4zQZ8HDZhW9UEScLdrP4+8fPWbA6olLb9ukcNH45kQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\nico1\\source\\repos\\navtest\\navtest\\navtest.Android\\navtest.Android.csproj",
+  "projectFilePath": "C:\\Users\\nico1\\OneDrive\\Documents\\GitHub\\XAMARIN_WS2812B\\navtest\\navtest.Android\\navtest.Android.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\nico1\\.nuget\\packages\\plugin.ble\\2.1.2\\plugin.ble.2.1.2.nupkg.sha512",
     "C:\\Users\\nico1\\.nuget\\packages\\system.numerics.vectors\\4.5.0\\system.numerics.vectors.4.5.0.nupkg.sha512",

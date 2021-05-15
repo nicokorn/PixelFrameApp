@@ -19,22 +19,63 @@ namespace navtest.Droid
         {
             base.OnCreate(savedInstanceState);
 
-            if (ContextCompat.CheckSelfPermission(this, Manifest.Permission.Bluetooth) == (int)Permission.Granted)
+            Xamarin.Essentials.Platform.Init(this, savedInstanceState);
+            global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
+            LoadApplication(new App());
+
+            if (ContextCompat.CheckSelfPermission(this, Manifest.Permission.AccessCoarseLocation) == (int)Permission.Granted)
             {
                 // We have permission
-                System.Diagnostics.Debug.WriteLine("Permission granted!");
+                System.Diagnostics.Debug.WriteLine("Permission coarse location granted!");
+                //ActivityCompat.RequestPermissions(this, new String[] { Manifest.Permission.AccessCoarseLocation }, 1);
             }
             else
             {
                 // Camera permission is not granted.
-                System.Diagnostics.Debug.WriteLine("Permission not granted!");
-                ActivityCompat.RequestPermissions(this, new String[] { Manifest.Permission.Bluetooth }, 1);
+                System.Diagnostics.Debug.WriteLine("Permission coarse location not granted!");
+                ActivityCompat.RequestPermissions(this, new String[] { Manifest.Permission.AccessCoarseLocation }, 1);
             }
 
-            Xamarin.Essentials.Platform.Init(this, savedInstanceState);
-            global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
-            LoadApplication(new App());
+            if (ContextCompat.CheckSelfPermission(this, Manifest.Permission.AccessFineLocation) == (int)Permission.Granted)
+            {
+                // We have permission
+                System.Diagnostics.Debug.WriteLine("Permission fine location granted!");
+                //ActivityCompat.RequestPermissions(this, new String[] { Manifest.Permission.AccessFineLocation }, 2);
+            }
+            else
+            {
+                // Camera permission is not granted.
+                System.Diagnostics.Debug.WriteLine("Permission  fine location not granted!");
+                ActivityCompat.RequestPermissions(this, new String[] { Manifest.Permission.AccessFineLocation }, 2);
+            }
+
+            if (    ContextCompat.CheckSelfPermission(this, Manifest.Permission.Bluetooth) == (int)Permission.Granted )
+            {
+                // We have permission
+                System.Diagnostics.Debug.WriteLine("Permission ble granted!");
+                //ActivityCompat.RequestPermissions(this, new String[] { Manifest.Permission.Bluetooth }, 3);
+            }
+            else
+            {
+                // Camera permission is not granted.
+                System.Diagnostics.Debug.WriteLine("Permission ble not granted!");
+                ActivityCompat.RequestPermissions(this, new String[] { Manifest.Permission.Bluetooth }, 3);
+            }
+
+            if (ContextCompat.CheckSelfPermission(this, Manifest.Permission.BluetoothAdmin) == (int)Permission.Granted)
+            {
+                // We have permission
+                System.Diagnostics.Debug.WriteLine("Permission ble admin granted!");
+                //ActivityCompat.RequestPermissions(this, new String[] { Manifest.Permission.BluetoothAdmin }, 4);
+            }
+            else
+            {
+                // Camera permission is not granted.
+                System.Diagnostics.Debug.WriteLine("Permission ble admin not granted!");
+                ActivityCompat.RequestPermissions(this, new String[] { Manifest.Permission.BluetoothAdmin }, 4);
+            }
         }
+
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -55,7 +96,7 @@ namespace navtest.Droid
             }
             else
             {
-                base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+                //base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
             }
         }
     }

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "2zgOJ6BOO2ML6p9R1cnbtNG5xs4mTI6kMec7W08pJb7doy7btM++lqcFbjqyNkpeuDCm3YXJcE+7RN5SSqHd1g==",
+  "dgSpecHash": "DYGZcZL9s1O0AtYKvavSzribWdppsweztWzdup8NMBNDCa+IqVdAlxir/4hY9q7QUddkV0F5FQ9YqR2ssERJZA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\nico1\\source\\repos\\navtest\\navtest\\navtest\\navtest.csproj",
+  "projectFilePath": "C:\\Users\\nico1\\OneDrive\\Documents\\GitHub\\XAMARIN_WS2812B\\navtest\\navtest\\navtest.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\nico1\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
     "C:\\Users\\nico1\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512",
