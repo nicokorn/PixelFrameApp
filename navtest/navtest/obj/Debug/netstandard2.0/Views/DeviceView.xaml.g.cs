@@ -8,12 +8,12 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: global::Xamarin.Forms.Xaml.XamlResourceIdAttribute("navtest.Views.DevicePage.xaml", "Views/DevicePage.xaml", typeof(global::navtest.Pages.DevicePage))]
+[assembly: global::Xamarin.Forms.Xaml.XamlResourceIdAttribute("navtest.Views.DeviceView.xaml", "Views/DeviceView.xaml", typeof(global::navtest.Pages.DevicePage))]
 
 namespace navtest.Pages {
     
     
-    [global::Xamarin.Forms.Xaml.XamlFilePathAttribute("Views\\DevicePage.xaml")]
+    [global::Xamarin.Forms.Xaml.XamlFilePathAttribute("Views\\DeviceView.xaml")]
     public partial class DevicePage : global::Xamarin.Forms.ContentPage {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "2.0.0.0")]

@@ -40,7 +40,6 @@ namespace navtest.ViewModels
 
         private void OnRefresh()
         {
-            //MainPage.bleScan();
             System.Diagnostics.Debug.WriteLine("¨Pull down refresh!");
         }
         protected void RaisePropertyChanged([CallerMemberName] string caller = "")

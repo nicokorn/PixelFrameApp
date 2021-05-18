@@ -8,12 +8,12 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: global::Xamarin.Forms.Xaml.XamlResourceIdAttribute("navtest.Views.MainPage.xaml", "Views/MainPage.xaml", typeof(global::navtest.MainPage))]
+[assembly: global::Xamarin.Forms.Xaml.XamlResourceIdAttribute("navtest.Views.ScanPage.xaml", "Views/ScanPage.xaml", typeof(global::navtest.MainPage))]
 
 namespace navtest {
     
     
-    [global::Xamarin.Forms.Xaml.XamlFilePathAttribute("Views\\MainPage.xaml")]
+    [global::Xamarin.Forms.Xaml.XamlFilePathAttribute("Views\\ScanPage.xaml")]
     public partial class MainPage : global::Xamarin.Forms.ContentPage {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "2.0.0.0")]

@@ -32,5 +32,5 @@ C:\Users\nico1\OneDrive\Documents\GitHub\XAMARIN_WS2812B\navtest\navtest\bin\Deb
 C:\Users\nico1\OneDrive\Documents\GitHub\XAMARIN_WS2812B\navtest\navtest\bin\Debug\netstandard2.0\ref\navtest.dll
 C:\Users\nico1\OneDrive\Documents\GitHub\XAMARIN_WS2812B\navtest\navtest\bin\Debug\netstandard2.0\navtest.pdb
 C:\Users\nico1\OneDrive\Documents\GitHub\XAMARIN_WS2812B\navtest\navtest\obj\Debug\netstandard2.0\XamlC.stamp
-C:\Users\nico1\OneDrive\Documents\GitHub\XAMARIN_WS2812B\navtest\navtest\obj\Debug\netstandard2.0\Views\DevicePage.xaml.g.cs
-C:\Users\nico1\OneDrive\Documents\GitHub\XAMARIN_WS2812B\navtest\navtest\obj\Debug\netstandard2.0\Views\MainPage.xaml.g.cs
+C:\Users\nico1\OneDrive\Documents\GitHub\XAMARIN_WS2812B\navtest\navtest\obj\Debug\netstandard2.0\Views\DeviceView.xaml.g.cs
+C:\Users\nico1\OneDrive\Documents\GitHub\XAMARIN_WS2812B\navtest\navtest\obj\Debug\netstandard2.0\Views\ScanView.xaml.g.cs
