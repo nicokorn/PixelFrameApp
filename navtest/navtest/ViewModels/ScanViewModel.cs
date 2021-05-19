@@ -59,7 +59,7 @@ namespace navtest.ViewModels
 
         public ScanViewModel()
         {
-            RefreshCommand = new Command(() => OnRefresh());
+            RefreshCommand = new Command(() => OnStartScan());
             ScanCommand = new Command(() => OnStartScan(), () => ScanEnabled);
 
             _isRefreshing = true;
