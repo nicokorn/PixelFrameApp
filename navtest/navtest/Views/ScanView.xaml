@@ -21,11 +21,12 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <StackLayout>
-                            <Label Text="{Binding Id}"/>
-                            <Label Text="{Binding Rssi}"/>
-                            <Label Text="{Binding Name}"/>
-                        </StackLayout>
+                        <Grid>
+                            <Label Grid.Row="0" Grid.Column="0" Text="{Binding Name}"/>
+                            <Label Grid.Row="1" Grid.Column="0" Text="{Binding Id}"/>
+                            <Label Grid.Row="1" Grid.Column="1" Text="{Binding Rssi}"/>
+                        </Grid>
+                       
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>

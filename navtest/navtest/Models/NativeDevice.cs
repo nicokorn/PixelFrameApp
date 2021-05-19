@@ -25,13 +25,13 @@ namespace navtest.Models
             }
 
             Name = device.Name;
-            if(Name == (null))
+            if(Name == null)
             {
                 Name = "No Name";
             }
 
             Rssi = device.Rssi.ToString();
-            if(Rssi == (null))
+            if(Rssi == null)
             {
                 Rssi = "Error";
             }

@@ -116,6 +116,7 @@ namespace navtest.ViewModels
             try
             {
                 _items.Clear();
+                //_items = null;
                 adapter.DeviceDiscovered += (s, a) =>
                 {
                     Debug.WriteLine("Discovered a device!");
