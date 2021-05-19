@@ -24,7 +24,7 @@
                         <Grid>
                             <Label Grid.Row="0" Grid.Column="0" Text="{Binding Name}"/>
                             <Label Grid.Row="1" Grid.Column="0" Text="{Binding Id}"/>
-                            <Label Grid.Row="1" Grid.Column="1" Text="{Binding Rssi}"/>
+                            <Label Grid.Row="1" Grid.Column="1" Text="{Binding Rssi}" HorizontalTextAlignment="End"/>
                         </Grid>
                        
                     </ViewCell>

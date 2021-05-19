@@ -82,12 +82,14 @@ namespace navtest.ViewModels
 
         private void OnDeviceDiscovered(object sender, DeviceEventArgs args)
         {
-            Debug.WriteLine("Device found!");
+            Debug.WriteLine("Discovered a device!");
+            _items.Add(new NativeDevice(args.Device));
         }
 
         private void Adapter_ScanTimeoutElapsed(object sender, EventArgs e)
         {
             Debug.WriteLine("Timeout!");
+            Debug.WriteLine("Item count: " + _items.Count);
             _scanEnabled = true;
             ScanCommand.ChangeCanExecute();
         }
@@ -116,12 +118,6 @@ namespace navtest.ViewModels
             try
             {
                 _items.Clear();
-                //_items = null;
-                adapter.DeviceDiscovered += (s, a) =>
-                {
-                    Debug.WriteLine("Discovered a device!");
-                    _items.Add(new NativeDevice(a.Device));
-                };
 
                 //We have to test if the device is scanning 
                 if (!ble.Adapter.IsScanning)
