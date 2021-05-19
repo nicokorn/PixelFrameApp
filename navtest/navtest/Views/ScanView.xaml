@@ -17,8 +17,20 @@
 
 		<Button Grid.Row="0" x:Name="btnScan" Text="Scan" Command="{Binding ScanCommand}" />
 
-		<ListView Grid.Row="1" x:Name="lv" IsPullToRefreshEnabled="{Binding IsRefreshing}" ItemsSource="{Binding Items}"/>
+        <ListView Grid.Row="1" x:Name="lv" IsPullToRefreshEnabled="{Binding IsRefreshing}" ItemsSource="{Binding Items}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout>
+                            <Label Text="{Binding Id}"/>
+                            <Label Text="{Binding Rssi}"/>
+                            <Label Text="{Binding Name}"/>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
 
-	</Grid>
+    </Grid>
 
         </ContentPage>

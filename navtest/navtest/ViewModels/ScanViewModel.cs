@@ -14,6 +14,7 @@ using System;
 
 using static navtest.ViewModels.DeviceListViewModel;
 using navtest.ViewModels;
+using navtest.Models;
 
 namespace navtest.ViewModels
 {
@@ -26,12 +27,9 @@ namespace navtest.ViewModels
 
         IBluetoothLE ble;
         IAdapter adapter;
-        //ObservableCollection<IDevice> deviceList;
-        IDevice device;
-        DeviceListViewModel test;
 
-        private ObservableCollection<IDevice> _items;
-        public ObservableCollection<IDevice> Items
+        private ObservableCollection<NativeDevice> _items;
+        public ObservableCollection<NativeDevice> Items
         {
             get 
             { 
@@ -67,7 +65,7 @@ namespace navtest.ViewModels
 
             ble = CrossBluetoothLE.Current;
             adapter = CrossBluetoothLE.Current.Adapter;
-            _items = new ObservableCollection<IDevice>();
+            _items = new ObservableCollection<NativeDevice>();
 
             // register callbacks
             ble.StateChanged += OnStateChanged;
@@ -75,9 +73,6 @@ namespace navtest.ViewModels
             adapter.ScanTimeoutElapsed += Adapter_ScanTimeoutElapsed;
             adapter.DeviceDisconnected += OnDeviceDisconnected;
             adapter.DeviceConnectionLost += OnDeviceConnectionLost;
-
-            // device list model
-            test = new DeviceListViewModel();
         }
 
         private void OnStateChanged(object sender, BluetoothStateChangedArgs e)
@@ -124,7 +119,7 @@ namespace navtest.ViewModels
                 adapter.DeviceDiscovered += (s, a) =>
                 {
                     Debug.WriteLine("Discovered a device!");
-                    _items.Add(a.Device);
+                    _items.Add(new NativeDevice(a.Device));
                 };
 
                 //We have to test if the device is scanning 
@@ -205,6 +200,5 @@ namespace navtest.ViewModels
                 PropertyChanged(this, new PropertyChangedEventArgs(caller));
             }
         }
-
     }
 }
