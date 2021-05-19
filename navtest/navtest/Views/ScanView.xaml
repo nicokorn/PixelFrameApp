@@ -17,7 +17,12 @@
 
 		<Button Grid.Row="0" x:Name="btnScan" Text="Scan" Command="{Binding ScanCommand}" />
 
-        <ListView Grid.Row="1" x:Name="lv" IsPullToRefreshEnabled="{Binding IsRefreshing}" ItemsSource="{Binding Items}">
+        <ListView Grid.Row="1" 
+                  x:Name="lv" 
+                  IsPullToRefreshEnabled="{Binding ScanEnabled}" 
+                  IsRefreshing="{Binding IsRefreshing, Mode=OneWay}"
+                  ItemsSource="{Binding Items}" 
+                  RefreshCommand="{Binding RefreshCommand}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
@@ -33,5 +38,4 @@
         </ListView>
 
     </Grid>
-
-        </ContentPage>
+</ContentPage>

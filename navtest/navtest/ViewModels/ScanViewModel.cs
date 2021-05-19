@@ -20,13 +20,12 @@ namespace navtest.ViewModels
 {
     public class ScanViewModel : INotifyPropertyChanged
     {
+        IBluetoothLE ble;
+        IAdapter adapter;
         private IDevice _nativeDevice;
         public event PropertyChangedEventHandler PropertyChanged;
         bool _isRefreshing;
         bool _scanEnabled;
-
-        IBluetoothLE ble;
-        IAdapter adapter;
 
         private ObservableCollection<NativeDevice> _items;
         public ObservableCollection<NativeDevice> Items
@@ -55,12 +54,39 @@ namespace navtest.ViewModels
             }
         }
 
+        public bool IsRefreshing
+        {
+            get
+            {
+                return _isRefreshing;
+            }
+            set
+            {
+                _isRefreshing = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public bool ScanEnabled
+        {
+            get
+            {
+                return _scanEnabled;
+            }
+            set
+            {
+                _scanEnabled = value;
+                ScanCommand.ChangeCanExecute();
+                RaisePropertyChanged();
+            }
+        }
+
         public ScanViewModel()
         {
-            RefreshCommand = new Command(() => OnStartScan());
+            RefreshCommand = new Command(() => OnStartScan(), () => ScanEnabled);
             ScanCommand = new Command(() => OnStartScan(), () => ScanEnabled);
 
-            _isRefreshing = true;
+            _isRefreshing = false;
             _scanEnabled = true;
 
             ble = CrossBluetoothLE.Current;
@@ -91,7 +117,10 @@ namespace navtest.ViewModels
             Debug.WriteLine("Timeout!");
             Debug.WriteLine("Item count: " + _items.Count);
             _scanEnabled = true;
+            _isRefreshing = false;
             ScanCommand.ChangeCanExecute();
+            RefreshCommand.ChangeCanExecute();
+            RaisePropertyChanged();
         }
 
         private void OnDeviceDisconnected(object sender, DeviceEventArgs args)
@@ -140,37 +169,11 @@ namespace navtest.ViewModels
             //device = lv.SelectedItem as IDevice;
         }
 
-        public bool isRefreshing
-        {
-            get
-            {
-                return _isRefreshing;
-            }
-            set
-            {
-                _isRefreshing = value;
-                RaisePropertyChanged();
-            }
-        }
-
         public void setRefresh()
         {
             System.Diagnostics.Debug.WriteLine("Listview binding refresh!");
             _isRefreshing = true;
             RaisePropertyChanged();
-        }
-
-        public bool ScanEnabled
-        {
-            get
-            {
-                return _scanEnabled;
-            }
-            set
-            {
-                _scanEnabled = value;
-                ScanCommand.ChangeCanExecute();
-            }
         }
 
         public Command RefreshCommand { get; set; }
@@ -187,7 +190,10 @@ namespace navtest.ViewModels
             System.Diagnostics.Debug.WriteLine("Scan button clicked!");
             bleScan();
             _scanEnabled = false;
+            _isRefreshing = true;
             ScanCommand.ChangeCanExecute();
+            RefreshCommand.ChangeCanExecute();
+            RaisePropertyChanged();
         }
 
         protected void RaisePropertyChanged([CallerMemberName] string caller = "")
