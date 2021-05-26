@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "zHd/JzqMXDwAeO0Rlt1FRQGB01uevG0/0UHMye3l6BMo4zQZ8HDZhW9UEScLdrP4+8fPWbA6olLb9ukcNH45kQ==",
+  "dgSpecHash": "ISJ0hLI0lHSyPUfPb0v0AEv8PexDYJkv+MBmx9moHyp2u3LCJYSTPI+Z8dpgm+upZehaaDarcl40pR2EmS6NfQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\nico1\\OneDrive\\Documents\\GitHub\\XAMARIN_WS2812B\\navtest\\navtest.Android\\navtest.Android.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\nico1\\.nuget\\packages\\acr.userdialogs\\7.1.0.514\\acr.userdialogs.7.1.0.514.nupkg.sha512",
+    "C:\\Users\\nico1\\.nuget\\packages\\andhud\\1.4.2\\andhud.1.4.2.nupkg.sha512",
     "C:\\Users\\nico1\\.nuget\\packages\\plugin.ble\\2.1.2\\plugin.ble.2.1.2.nupkg.sha512",
     "C:\\Users\\nico1\\.nuget\\packages\\system.numerics.vectors\\4.5.0\\system.numerics.vectors.4.5.0.nupkg.sha512",
     "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\xamarin.androidx.activity\\1.1.0.5\\xamarin.androidx.activity.1.1.0.5.nupkg.sha512",

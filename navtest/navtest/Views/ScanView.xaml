@@ -18,11 +18,12 @@
 		<Button Grid.Row="0" x:Name="btnScan" Text="Scan" Command="{Binding ScanCommand}" />
 
         <ListView Grid.Row="1" 
-                  x:Name="lv" 
+                  RefreshCommand="{Binding RefreshCommand}"
                   IsPullToRefreshEnabled="{Binding ScanEnabled}" 
                   IsRefreshing="{Binding IsRefreshing, Mode=OneWay}"
                   ItemsSource="{Binding Items}" 
-                  RefreshCommand="{Binding RefreshCommand}">
+                  SelectedItem="{Binding SelectedDevice, Mode=TwoWay}"
+                  >
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
@@ -31,7 +32,6 @@
                             <Label Grid.Row="1" Grid.Column="0" Text="{Binding Id}"/>
                             <Label Grid.Row="1" Grid.Column="1" Text="{Binding Rssi}" HorizontalTextAlignment="End"/>
                         </Grid>
-                       
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>

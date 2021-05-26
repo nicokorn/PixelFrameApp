@@ -9,6 +9,7 @@
     ".NETStandard,Version=v2.0/": {
       "navtest/1.0.0": {
         "dependencies": {
+          "Acr.UserDialogs": "7.1.0.514",
           "NETStandard.Library": "2.0.3",
           "Plugin.BLE": "2.1.2",
           "Xamarin.Essentials": "1.6.1",
@@ -16,6 +17,14 @@
         },
         "runtime": {
           "navtest.dll": {}
+        }
+      },
+      "Acr.UserDialogs/7.1.0.514": {
+        "runtime": {
+          "lib/netstandard2.0/Acr.UserDialogs.dll": {
+            "assemblyVersion": "7.1.0.514",
+            "fileVersion": "7.1.0.514"
+          }
         }
       },
       "Microsoft.NETCore.Platforms/1.1.0": {},
@@ -78,6 +87,13 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "Acr.UserDialogs/7.1.0.514": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-jSjxoOtwS4qHXRpRJxt5anCwRxga+RK22N0w/hR4wLwmxfVBv7eVHX+BsMYFF/Qe6SJGO5dJDcIyh/7+gbEkCA==",
+      "path": "acr.userdialogs/7.1.0.514",
+      "hashPath": "acr.userdialogs.7.1.0.514.nupkg.sha512"
     },
     "Microsoft.NETCore.Platforms/1.1.0": {
       "type": "package",

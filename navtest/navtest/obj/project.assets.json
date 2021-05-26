@@ -2,6 +2,15 @@
   "version": 3,
   "targets": {
     ".NETStandard,Version=v2.0": {
+      "Acr.UserDialogs/7.1.0.514": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/Acr.UserDialogs.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Acr.UserDialogs.dll": {}
+        }
+      },
       "Microsoft.NETCore.Platforms/1.1.0": {
         "type": "package",
         "compile": {
@@ -78,6 +87,41 @@
     }
   },
   "libraries": {
+    "Acr.UserDialogs/7.1.0.514": {
+      "sha512": "jSjxoOtwS4qHXRpRJxt5anCwRxga+RK22N0w/hR4wLwmxfVBv7eVHX+BsMYFF/Qe6SJGO5dJDcIyh/7+gbEkCA==",
+      "type": "package",
+      "path": "acr.userdialogs/7.1.0.514",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "acr.userdialogs.7.1.0.514.nupkg.sha512",
+        "acr.userdialogs.nuspec",
+        "lib/monoandroid10.0/Acr.UserDialogs.dll",
+        "lib/monoandroid10.0/Acr.UserDialogs.pdb",
+        "lib/monoandroid10.0/Acr.UserDialogs.xml",
+        "lib/monoandroid90/Acr.UserDialogs.dll",
+        "lib/monoandroid90/Acr.UserDialogs.pdb",
+        "lib/monoandroid90/Acr.UserDialogs.xml",
+        "lib/netstandard2.0/Acr.UserDialogs.dll",
+        "lib/netstandard2.0/Acr.UserDialogs.pdb",
+        "lib/netstandard2.0/Acr.UserDialogs.xml",
+        "lib/uap10.0.16299/Acr.UserDialogs.dll",
+        "lib/uap10.0.16299/Acr.UserDialogs.pdb",
+        "lib/uap10.0.16299/Acr.UserDialogs.pri",
+        "lib/uap10.0.16299/Acr.UserDialogs.xml",
+        "lib/uap10.0.16299/Acr.UserDialogs/Acr.UserDialogs.xr.xml",
+        "lib/xamarinios10/Acr.UserDialogs.dll",
+        "lib/xamarinios10/Acr.UserDialogs.pdb",
+        "lib/xamarinios10/Acr.UserDialogs.xml",
+        "lib/xamarinmac20/Acr.UserDialogs.dll",
+        "lib/xamarinmac20/Acr.UserDialogs.pdb",
+        "lib/xamarinmac20/Acr.UserDialogs.xml",
+        "lib/xamarintvos10/Acr.UserDialogs.dll",
+        "lib/xamarintvos10/Acr.UserDialogs.pdb",
+        "lib/xamarintvos10/Acr.UserDialogs.xml",
+        "readme.txt"
+      ]
+    },
     "Microsoft.NETCore.Platforms/1.1.0": {
       "sha512": "kz0PEW2lhqygehI/d6XsPCQzD7ff7gUJaVGPVETX611eadGsA3A877GdSlU0LRVMCTH/+P3o2iDTak+S08V2+A==",
       "type": "package",
@@ -575,6 +619,7 @@
   },
   "projectFileDependencyGroups": {
     ".NETStandard,Version=v2.0": [
+      "Acr.UserDialogs >= 7.1.0.514",
       "NETStandard.Library >= 2.0.3",
       "Plugin.BLE >= 2.1.2",
       "Xamarin.Essentials >= 1.6.1",
@@ -625,6 +670,10 @@
       "netstandard2.0": {
         "targetAlias": "netstandard2.0",
         "dependencies": {
+          "Acr.UserDialogs": {
+            "target": "Package",
+            "version": "[7.1.0.514, )"
+          },
           "NETStandard.Library": {
             "suppressParent": "All",
             "target": "Package",

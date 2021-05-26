@@ -3,6 +3,8 @@ public class MonoPackageManager_Resources {
 	public static String[] Assemblies = new String[]{
 		/* We need to ensure that "navtest.Android.dll" comes first in this list. */
 		"navtest.Android.dll",
+		"Acr.UserDialogs.dll",
+		"AndHUD.dll",
 		"FormsViewGroup.dll",
 		"navtest.dll",
 		"Plugin.BLE.Abstractions.dll",

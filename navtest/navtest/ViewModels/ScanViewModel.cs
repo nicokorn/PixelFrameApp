@@ -15,6 +15,9 @@ using System;
 using static navtest.ViewModels.DeviceListViewModel;
 using navtest.ViewModels;
 using navtest.Models;
+using Acr.UserDialogs;
+using System.Threading.Tasks;
+using System.Threading;
 
 namespace navtest.ViewModels
 {
@@ -22,7 +25,7 @@ namespace navtest.ViewModels
     {
         IBluetoothLE ble;
         IAdapter adapter;
-        private IDevice _nativeDevice;
+        private readonly IUserDialogs _userDialogs;
         public event PropertyChangedEventHandler PropertyChanged;
         bool _isRefreshing;
         bool _scanEnabled;
@@ -41,15 +44,16 @@ namespace navtest.ViewModels
             }
         }
 
-        public IDevice NativeDevice
+        public NativeDevice SelectedDevice
         {
-            get
-            {
-                return _nativeDevice;
-            }
+            get => null;
             set
             {
-                _nativeDevice = value;
+                if (value != null)
+                {
+                    HandleSelectedDevice(value);
+                }
+
                 RaisePropertyChanged();
             }
         }
@@ -63,7 +67,7 @@ namespace navtest.ViewModels
             set
             {
                 _isRefreshing = value;
-                RaisePropertyChanged();
+                RaisePropertyChanged("IsRefreshing");
             }
         }
 
@@ -77,7 +81,7 @@ namespace navtest.ViewModels
             {
                 _scanEnabled = value;
                 ScanCommand.ChangeCanExecute();
-                RaisePropertyChanged();
+                RaisePropertyChanged("ScanEnabled");
             }
         }
 
@@ -120,7 +124,7 @@ namespace navtest.ViewModels
             _isRefreshing = false;
             ScanCommand.ChangeCanExecute();
             RefreshCommand.ChangeCanExecute();
-            RaisePropertyChanged();
+            RaisePropertyChanged("IsRefreshing");
         }
 
         private void OnDeviceDisconnected(object sender, DeviceEventArgs args)
@@ -169,19 +173,7 @@ namespace navtest.ViewModels
             //device = lv.SelectedItem as IDevice;
         }
 
-        public void setRefresh()
-        {
-            System.Diagnostics.Debug.WriteLine("Listview binding refresh!");
-            _isRefreshing = true;
-            RaisePropertyChanged();
-        }
-
         public Command RefreshCommand { get; set; }
-
-        private void OnRefresh()
-        {
-            System.Diagnostics.Debug.WriteLine("¨Pull down refresh!");
-        }
 
         public Command ScanCommand { get; set; }
 
@@ -190,10 +182,36 @@ namespace navtest.ViewModels
             System.Diagnostics.Debug.WriteLine("Scan button clicked!");
             bleScan();
             _scanEnabled = false;
-            _isRefreshing = true;
+            _isRefreshing = false;
             ScanCommand.ChangeCanExecute();
             RefreshCommand.ChangeCanExecute();
-            RaisePropertyChanged();
+            RaisePropertyChanged("IsRefreshing");
+        }
+
+        private async void HandleSelectedDevice(NativeDevice device)
+        {
+            if( await ConnectDeviceAsync(device) )
+           {
+                Debug.WriteLine("Connected!");
+                //var navigation = Mvx.IoCProvider.Resolve<IMvxNavigationService>();
+                //await navigation.Navigate<ServiceListViewModel, MvxBundle>(new MvxBundle(new Dictionary<string, string> { { DeviceIdKey, device.Device.Id.ToString() } }));
+            }
+        }
+
+        private async Task<bool> ConnectDeviceAsync(NativeDevice device, bool showPrompt = true)
+        {
+            try
+            {
+                await adapter.ConnectToDeviceAsync(device.Device, new ConnectParameters(autoConnect: true, forceBleTransport: true));
+                Debug.WriteLine($"Connected to {device.Device.Name}.");
+                return true;
+
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message, "Connection error");
+                return false;
+            }
         }
 
         protected void RaisePropertyChanged([CallerMemberName] string caller = "")

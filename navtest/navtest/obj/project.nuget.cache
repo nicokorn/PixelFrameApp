@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "DYGZcZL9s1O0AtYKvavSzribWdppsweztWzdup8NMBNDCa+IqVdAlxir/4hY9q7QUddkV0F5FQ9YqR2ssERJZA==",
+  "dgSpecHash": "KEZoXsnVZ7HDEpHqYkA8dwm+aKCm0vp5PNIF2Gl8Ifq6P0Ikl/fw7Ga7EfnTcO54ppN0jxDARXosLdmmdvdvSQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\nico1\\OneDrive\\Documents\\GitHub\\XAMARIN_WS2812B\\navtest\\navtest\\navtest.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\nico1\\.nuget\\packages\\acr.userdialogs\\7.1.0.514\\acr.userdialogs.7.1.0.514.nupkg.sha512",
     "C:\\Users\\nico1\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
     "C:\\Users\\nico1\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512",
     "C:\\Users\\nico1\\.nuget\\packages\\plugin.ble\\2.1.2\\plugin.ble.2.1.2.nupkg.sha512",

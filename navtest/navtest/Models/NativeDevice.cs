@@ -9,7 +9,7 @@ namespace navtest.Models
 
         public string Rssi { get; set; }
 
-        public IDevice device;
+        public IDevice Device;
 
         public override string ToString()
         {
@@ -36,7 +36,7 @@ namespace navtest.Models
                 Rssi = "Error";
             }
 
-            this.device = device;
+            this.Device = device;
         }
     }
 }
