@@ -8,20 +8,20 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: global::Xamarin.Forms.Xaml.XamlResourceIdAttribute("navtest.Views.ScanView.xaml", "Views/ScanView.xaml", typeof(global::navtest.MainPage))]
+[assembly: global::Xamarin.Forms.Xaml.XamlResourceIdAttribute("navtest.Views.ScanView.xaml", "Views/ScanView.xaml", typeof(global::navtest.Views.ScanView))]
 
-namespace navtest {
+namespace navtest.Views {
     
     
     [global::Xamarin.Forms.Xaml.XamlFilePathAttribute("Views\\ScanView.xaml")]
-    public partial class MainPage : global::Xamarin.Forms.ContentPage {
+    public partial class ScanView : global::Xamarin.Forms.ContentPage {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "2.0.0.0")]
         private global::Xamarin.Forms.Button btnScan;
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "2.0.0.0")]
         private void InitializeComponent() {
-            global::Xamarin.Forms.Xaml.Extensions.LoadFromXaml(this, typeof(MainPage));
+            global::Xamarin.Forms.Xaml.Extensions.LoadFromXaml(this, typeof(ScanView));
             btnScan = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Xamarin.Forms.Button>(this, "btnScan");
         }
     }

@@ -2,20 +2,20 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:vm="clr-namespace:navtest.ViewModels"
 			 Title="Scan for devices"
-             x:Class="navtest.MainPage">
+             x:Class="navtest.Views.ScanView">
 
-	<ContentPage.BindingContext>
-		<vm:ScanViewModel></vm:ScanViewModel>
-	</ContentPage.BindingContext>
+    <ContentPage.BindingContext>
+        <vm:ScanViewModel></vm:ScanViewModel>
+    </ContentPage.BindingContext>
 
-	<Grid>
+    <Grid>
 
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
-			<RowDefinition Height="*"></RowDefinition>
-		</Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
 
-		<Button Grid.Row="0" x:Name="btnScan" Text="Scan" Command="{Binding ScanCommand}" />
+        <Button Grid.Row="0" x:Name="btnScan" Text="Scan" Command="{Binding ScanCommand}" />
 
         <ListView Grid.Row="1" 
                   RefreshCommand="{Binding RefreshCommand}"

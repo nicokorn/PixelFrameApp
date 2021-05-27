@@ -1,4 +1,5 @@
-﻿using System;
+﻿using navtest.Views;
+using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -10,9 +11,9 @@ namespace navtest
         {
             InitializeComponent();
 
-            var homePage = new MainPage();
-            var navPage = new NavigationPage(homePage);
-            this.MainPage = navPage;
+            var scanView = new ScanView();
+            var navPage = new NavigationPage(scanView);
+            //this.MainPage = navPage;
         }
 
         protected override void OnStart()

@@ -18,6 +18,7 @@ using navtest.Models;
 using Acr.UserDialogs;
 using System.Threading.Tasks;
 using System.Threading;
+using navtest.Pages;
 
 namespace navtest.ViewModels
 {
@@ -25,6 +26,7 @@ namespace navtest.ViewModels
     {
         IBluetoothLE ble;
         IAdapter adapter;
+        INavigation navigation;
         private readonly IUserDialogs _userDialogs;
         public event PropertyChangedEventHandler PropertyChanged;
         bool _isRefreshing;
@@ -85,8 +87,15 @@ namespace navtest.ViewModels
             }
         }
 
+
         public ScanViewModel()
         {
+        }
+
+        public ScanViewModel( INavigation navigation )
+        {
+            this.navigation = navigation;
+
             RefreshCommand = new Command(() => OnStartScan(), () => ScanEnabled);
             ScanCommand = new Command(() => OnStartScan(), () => ScanEnabled);
 
@@ -193,6 +202,7 @@ namespace navtest.ViewModels
             if( await ConnectDeviceAsync(device) )
            {
                 Debug.WriteLine("Connected!");
+                await this.navigation.PushAsync(new DevicePage(), true);
                 //var navigation = Mvx.IoCProvider.Resolve<IMvxNavigationService>();
                 //await navigation.Navigate<ServiceListViewModel, MvxBundle>(new MvxBundle(new Dictionary<string, string> { { DeviceIdKey, device.Device.Id.ToString() } }));
             }
