@@ -13,7 +13,7 @@ namespace navtest
 
             var scanView = new ScanView();
             var navPage = new NavigationPage(scanView);
-            //this.MainPage = navPage;
+            this.MainPage = navPage;
         }
 
         protected override void OnStart()

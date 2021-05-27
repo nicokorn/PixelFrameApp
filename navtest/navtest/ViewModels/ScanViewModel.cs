@@ -12,7 +12,6 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System;
 
-using static navtest.ViewModels.DeviceListViewModel;
 using navtest.ViewModels;
 using navtest.Models;
 using Acr.UserDialogs;
@@ -22,13 +21,11 @@ using navtest.Pages;
 
 namespace navtest.ViewModels
 {
-    public class ScanViewModel : INotifyPropertyChanged
+    public class ScanViewModel : BaseViewModel
     {
         IBluetoothLE ble;
         IAdapter adapter;
         INavigation navigation;
-        private readonly IUserDialogs _userDialogs;
-        public event PropertyChangedEventHandler PropertyChanged;
         bool _isRefreshing;
         bool _scanEnabled;
 
@@ -173,15 +170,6 @@ namespace navtest.ViewModels
             }
         }
 
-        private void lv__itemselected(object sender, SelectedItemChangedEventArgs e)
-        {
-            //if (lv.SelectedItem == null)
-            //{
-            //    return;
-            //}
-            //device = lv.SelectedItem as IDevice;
-        }
-
         public Command RefreshCommand { get; set; }
 
         public Command ScanCommand { get; set; }
@@ -199,12 +187,11 @@ namespace navtest.ViewModels
 
         private async void HandleSelectedDevice(NativeDevice device)
         {
-            if( await ConnectDeviceAsync(device) )
+            await App.Current.MainPage.DisplayAlert("Connectig", "Connecting to device.", "OK");
+            if ( await ConnectDeviceAsync(device) )
            {
                 Debug.WriteLine("Connected!");
                 await this.navigation.PushAsync(new DevicePage(), true);
-                //var navigation = Mvx.IoCProvider.Resolve<IMvxNavigationService>();
-                //await navigation.Navigate<ServiceListViewModel, MvxBundle>(new MvxBundle(new Dictionary<string, string> { { DeviceIdKey, device.Device.Id.ToString() } }));
             }
         }
 
@@ -221,14 +208,6 @@ namespace navtest.ViewModels
             {
                 Debug.WriteLine(ex.Message, "Connection error");
                 return false;
-            }
-        }
-
-        protected void RaisePropertyChanged([CallerMemberName] string caller = "")
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(caller));
             }
         }
     }
