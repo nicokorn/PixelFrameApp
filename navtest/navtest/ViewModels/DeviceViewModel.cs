@@ -59,6 +59,7 @@ namespace navtest.ViewModels
         }
 
         public Command PixelCommand { get; set; }
+        public Command EraseCommand { get; set; }
 
         private async void sendPixel()
         {
@@ -71,6 +72,27 @@ namespace navtest.ViewModels
             {
                 UUID_WS2812B_PIXEL_CHAR = await UUID_WS2812B_SERVICE.GetCharacteristicAsync(Guid.Parse(UUID_WS2812B_PIXEL_CHAR_UID));
                 await UUID_WS2812B_PIXEL_CHAR.WriteAsync(data);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message, "Error while sending pixel characteristics");
+                //_userDialogs.HideLoading();
+                //await _userDialogs.AlertAsync(ex.Message);
+            }
+        }
+
+        private async void erasePixel()
+        {
+            Debug.WriteLine("Erase all pixel");
+
+            try
+            {
+                UUID_WS2812B_PIXEL_CHAR = await UUID_WS2812B_SERVICE.GetCharacteristicAsync(Guid.Parse(UUID_WS2812B_PIXEL_CHAR_UID));
+                for(int i=0; i<18; i++)
+                {
+                    byte[] data = { (byte)i, 0x00, 0x00, 0x00, 0x00,0x00,0x00 };
+                    await UUID_WS2812B_PIXEL_CHAR.WriteAsync(data);
+                }
             }
             catch (Exception ex)
             {
@@ -93,6 +115,7 @@ namespace navtest.ViewModels
             connectedDevice = BaseViewModel.connectedDevice;
 
             PixelCommand = new Command(() => sendPixel());
+            EraseCommand = new Command(() => erasePixel());
 
             _deviceName = connectedDevice.Name;
             _lblRow = "na";
