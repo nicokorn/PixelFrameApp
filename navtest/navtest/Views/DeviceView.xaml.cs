@@ -1,4 +1,5 @@
-﻿using System;
+﻿using navtest.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,14 +8,15 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace navtest.Pages
+namespace navtest.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class DevicePage : ContentPage
+    public partial class DeviceView : ContentPage
     {
-        public DevicePage()
+        public DeviceView()
         {
             InitializeComponent();
+            this.BindingContext = new DeviceViewModel(this.Navigation);
         }
     }
 }

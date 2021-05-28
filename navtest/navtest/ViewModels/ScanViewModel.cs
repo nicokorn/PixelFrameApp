@@ -17,7 +17,7 @@ using navtest.Models;
 using Acr.UserDialogs;
 using System.Threading.Tasks;
 using System.Threading;
-using navtest.Pages;
+using navtest.Views;
 
 namespace navtest.ViewModels
 {
@@ -28,6 +28,7 @@ namespace navtest.ViewModels
         INavigation navigation;
         bool _isRefreshing;
         bool _scanEnabled;
+        NativeDevice connectedDevice;
 
         private ObservableCollection<NativeDevice> _items;
         public ObservableCollection<NativeDevice> Items
@@ -191,7 +192,8 @@ namespace navtest.ViewModels
             if ( await ConnectDeviceAsync(device) )
            {
                 Debug.WriteLine("Connected!");
-                await this.navigation.PushAsync(new DevicePage(), true);
+                BaseViewModel.connectedDevice=device;
+                await this.navigation.PushAsync(new DeviceView(), true);
             }
         }
 
@@ -200,6 +202,7 @@ namespace navtest.ViewModels
             try
             {
                 await adapter.ConnectToDeviceAsync(device.Device, new ConnectParameters(autoConnect: true, forceBleTransport: true));
+                connectedDevice = device;
                 Debug.WriteLine($"Connected to {device.Device.Name}.");
                 return true;
 
@@ -209,6 +212,11 @@ namespace navtest.ViewModels
                 Debug.WriteLine(ex.Message, "Connection error");
                 return false;
             }
+        }
+
+        private async void DisconnectDevice(NativeDevice device)
+        {
+            await adapter.DisconnectDeviceAsync(device.Device);
         }
     }
 }

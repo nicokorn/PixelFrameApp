@@ -8,17 +8,17 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: global::Xamarin.Forms.Xaml.XamlResourceIdAttribute("navtest.Views.DeviceView.xaml", "Views/DeviceView.xaml", typeof(global::navtest.Pages.DevicePage))]
+[assembly: global::Xamarin.Forms.Xaml.XamlResourceIdAttribute("navtest.Views.DeviceView.xaml", "Views/DeviceView.xaml", typeof(global::navtest.Views.DeviceView))]
 
-namespace navtest.Pages {
+namespace navtest.Views {
     
     
     [global::Xamarin.Forms.Xaml.XamlFilePathAttribute("Views\\DeviceView.xaml")]
-    public partial class DevicePage : global::Xamarin.Forms.ContentPage {
+    public partial class DeviceView : global::Xamarin.Forms.ContentPage {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "2.0.0.0")]
         private void InitializeComponent() {
-            global::Xamarin.Forms.Xaml.Extensions.LoadFromXaml(this, typeof(DevicePage));
+            global::Xamarin.Forms.Xaml.Extensions.LoadFromXaml(this, typeof(DeviceView));
         }
     }
 }

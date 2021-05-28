@@ -1,12 +1,26 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="navtest.Pages.DevicePage">
+             x:Class="navtest.Views.DeviceView">
     <ContentPage.Content>
         <StackLayout>
             <Label Text="WS2812B device"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
+            <Label Text="{Binding DeviceName}"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+
+
+            <Grid>
+                <Label Grid.Row="0" Grid.Column="0" Text="Number of rows"/>
+                <Label Grid.Row="0" Grid.Column="1" Text="{Binding LblRow}"/>
+                <Label Grid.Row="1" Grid.Column="0" Text="Number of cols"/>
+                <Label Grid.Row="1" Grid.Column="1" Text="{Binding LblCol}"/>
+            </Grid>
+
+            <Button Text="Magic!" Command="{Binding PixelCommand}" IsEnabled="True" />
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
