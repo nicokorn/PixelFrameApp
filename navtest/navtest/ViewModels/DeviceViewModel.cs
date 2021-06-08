@@ -65,8 +65,9 @@ namespace navtest.ViewModels
         {
             Random rnd = new Random();
             Debug.WriteLine("Send pixel");
-            int row = rnd.Next() % 18;
-            byte[] data = { (byte)row, 0x00,    0x00, 0x00, (byte)rnd.Next(), (byte)rnd.Next(), (byte)rnd.Next() };
+            int row = rnd.Next() % int.Parse(_lblRow);
+            int col = rnd.Next() % int.Parse(_lblCol);
+            byte[] data = { (byte)row, 0x00, (byte)col, 0x00, (byte)rnd.Next(), (byte)rnd.Next(), (byte)rnd.Next() };
 
             try
             {
@@ -88,10 +89,13 @@ namespace navtest.ViewModels
             try
             {
                 UUID_WS2812B_PIXEL_CHAR = await UUID_WS2812B_SERVICE.GetCharacteristicAsync(Guid.Parse(UUID_WS2812B_PIXEL_CHAR_UID));
-                for(int i=0; i<18; i++)
+                for(int row=0; row < int.Parse(_lblRow); row++)
                 {
-                    byte[] data = { (byte)i, 0x00, 0x00, 0x00, 0x00,0x00,0x00 };
-                    await UUID_WS2812B_PIXEL_CHAR.WriteAsync(data);
+                    for (int col = 0; col < int.Parse(_lblCol); col++)
+                    {
+                        byte[] data = { (byte)col, 0x00, (byte)row, 0x00, 0x00, 0x00, 0x00 };
+                        await UUID_WS2812B_PIXEL_CHAR.WriteAsync(data);
+                    }
                 }
             }
             catch (Exception ex)
