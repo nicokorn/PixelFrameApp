@@ -31,6 +31,13 @@ namespace navtest.ViewModels
         protected ICharacteristic UUID_WS2812B_PIXEL_CHAR;
         protected const string UUID_WS2812B_PIXEL_CHAR_UID = "a2bf1005-7936-bc40-a3d9-1ea3b1cc51bc";
 
+        protected ICharacteristic UUID_WS2812B_PICTURE_CHAR;
+        protected const string UUID_WS2812B_PICTURE_CHAR_UID = "a2bf1006-7936-bc40-a3d9-1ea3b1cc51bc";
+
+        protected const int PICTURE_HEADER_OFFSET = 5;
+        protected const int MAX_BLE_SIZE = 506;
+        protected const int MAX_PICTURE_PAYLOAD = MAX_BLE_SIZE - PICTURE_HEADER_OFFSET; // payload X size needs to be X%3=0!
+
         protected void RaisePropertyChanged([CallerMemberName] string caller = "")
         {
             if (PropertyChanged != null)

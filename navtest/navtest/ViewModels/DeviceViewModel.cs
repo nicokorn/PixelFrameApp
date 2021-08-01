@@ -88,19 +88,65 @@ namespace navtest.ViewModels
 
             try
             {
-                UUID_WS2812B_PIXEL_CHAR = await UUID_WS2812B_SERVICE.GetCharacteristicAsync(Guid.Parse(UUID_WS2812B_PIXEL_CHAR_UID));
-                for(int row=0; row < int.Parse(_lblRow); row++)
+                //UUID_WS2812B_PIXEL_CHAR = await UUID_WS2812B_SERVICE.GetCharacteristicAsync(Guid.Parse(UUID_WS2812B_PIXEL_CHAR_UID));
+                //for(int row=0; row < int.Parse(_lblRow); row++)
+                //{
+                //    for (int col = 0; col < int.Parse(_lblCol); col++)
+                //    {
+                //        byte[] data = { (byte)col, 0x00, (byte)row, 0x00, 0x00, 0x00, 0x00 };
+                //        await UUID_WS2812B_PIXEL_CHAR.WriteAsync(data);
+                //    }
+                //}
+
+                UUID_WS2812B_PICTURE_CHAR = await UUID_WS2812B_SERVICE.GetCharacteristicAsync(Guid.Parse(UUID_WS2812B_PICTURE_CHAR_UID));
+
+                var data = new byte[MAX_BLE_SIZE];
+                int pixelcount = int.Parse(_lblCol) * int.Parse(_lblRow);
+                int bytecount = pixelcount*3; // because 1 pixel = 3*8bit
+                int packetcount = bytecount / MAX_PICTURE_PAYLOAD + 1;
+                int offset;
+                int size;
+
+                for (int packetnr=0; packetnr < packetcount; packetnr++)
                 {
-                    for (int col = 0; col < int.Parse(_lblCol); col++)
+                    // set header
+                    offset = packetnr * MAX_PICTURE_PAYLOAD;
+                    byte[] offsetB = BitConverter.GetBytes(offset);
+                    data[0] = offsetB[0];
+                    data[1] = offsetB[1];
+
+                    if(packetnr== packetcount-1)
                     {
-                        byte[] data = { (byte)col, 0x00, (byte)row, 0x00, 0x00, 0x00, 0x00 };
-                        await UUID_WS2812B_PIXEL_CHAR.WriteAsync(data);
+                        // last packet
+                        size = bytecount % MAX_PICTURE_PAYLOAD;
+                        byte[] sizeB = BitConverter.GetBytes(size);
+                        data[2] = sizeB[0];
+                        data[3] = sizeB[1];
+                        data[4] = 1;
                     }
+                    else
+                    {
+                        size = MAX_PICTURE_PAYLOAD;
+                        byte[] sizeB = BitConverter.GetBytes(size);
+                        data[2] = sizeB[0];
+                        data[3] = sizeB[1];
+                        data[4] = 0;
+                    }
+
+                    // set picture data (3*8bits=1pixel)
+                    for(int pixelbyte=0; pixelbyte < size; pixelbyte++)
+                    {
+                        data[PICTURE_HEADER_OFFSET + pixelbyte] = 0x00;
+                    }
+
+                    // send the packet
+                    await UUID_WS2812B_PICTURE_CHAR.WriteAsync(data);
+                    Debug.WriteLine("Packet: "+(packetnr+1)+"/"+ packetcount + " sended, with "+(size+4)+" bytes");
                 }
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex.Message, "Error while sending pixel characteristics");
+                Debug.WriteLine(ex.Message, "Error while sending picture");
                 //_userDialogs.HideLoading();
                 //await _userDialogs.AlertAsync(ex.Message);
             }
