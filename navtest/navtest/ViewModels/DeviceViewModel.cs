@@ -88,6 +88,20 @@ namespace navtest.ViewModels
             }
         }
 
+        private ObservableCollection<ObservableCollection<Pixel>> _frameCol;
+        public ObservableCollection<ObservableCollection<Pixel>> FrameCol
+        {
+            get
+            {
+                return _frameCol;
+            }
+            set
+            {
+                _frameCol = value;
+                RaisePropertyChanged();
+            }
+        }
+
         public Command PixelCommand { get; set; }
         public Command EraseCommand { get; set; }
 
@@ -174,6 +188,7 @@ namespace navtest.ViewModels
 
         private void HandleSelectedPixel(Pixel pixel)
         {
+            pixel.Property.BackgroundColor = Color.FromRgb(255, 0, 0);
             Debug.WriteLine("Pushed Pixel x: "+pixel.X+", y: "+pixel.Y);
         }
 
@@ -185,6 +200,7 @@ namespace navtest.ViewModels
             adapter = CrossBluetoothLE.Current.Adapter;
             connectedDevice = BaseViewModel.connectedDevice;
 
+            _frameCol = new ObservableCollection<ObservableCollection<Pixel>>();
             _pixel = new ObservableCollection<Pixel>();
 
             PixelCommand = new Command(() => sendPixel());
@@ -196,13 +212,16 @@ namespace navtest.ViewModels
 
             LoadServicesWS2812B();
 
-            for( int i=0; i<4; i++ )
+            for( int y=0; y<15; y++ )
             {
-                Pixel pixel;
-                pixel = new Pixel(0, i);
-                pixel.Property.BackgroundColor = Color.FromRgb(50, 50, 50);
-                pixel.Property.Text = "test";
-                _pixel.Add(pixel);
+                for ( int x=0; x<15; x++ )
+                {
+                    Pixel pixel;
+                    pixel = new Pixel(x, y);
+                    pixel.Property.BackgroundColor = Color.FromRgb(50, 50, 50);
+                    pixel.Property.Text = "test";
+                    _pixel.Add(pixel);
+                }
             }
 
             // register callbacks

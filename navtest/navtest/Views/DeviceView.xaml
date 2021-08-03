@@ -4,28 +4,35 @@
              x:Class="navtest.Views.DeviceView">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="WS2812B Device"
+            <Label Text="WS2812B Device Controller"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
 
-            <Label Text="{Binding DeviceName}"
+            <Label Text="Frame preview"
+                   FontAttributes="Bold"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
 
-            <ListView Grid.Row="1" 
-                  ItemsSource="{Binding Pixel}" 
-                  SelectedItem="{Binding SelectedPixel, Mode=TwoWay}"
-                  >
-                <ListView.ItemTemplate>
+            <CollectionView
+                ItemsSource="{Binding Pixel}" 
+                SelectionMode="Single"
+                SelectedItem="{Binding SelectedPixel, Mode=TwoWay}"
+                ItemsLayout="VerticalGrid,15" 
+                >
+                <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <ViewCell>
-                            <Grid>
-                                <Label BackgroundColor="{Binding Property.BackgroundColor}"/>
-                            </Grid>
-                        </ViewCell>
+                        <Grid Padding="0.5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="30" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Label BackgroundColor="{Binding Property.BackgroundColor}"/>
+                        </Grid>
                     </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
 
             <Grid>
                 <Label Grid.Row="0" Grid.Column="0" Text="Number of rows"/>
