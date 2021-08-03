@@ -4,13 +4,28 @@
              x:Class="navtest.Views.DeviceView">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="WS2812B device"
+            <Label Text="WS2812B Device"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
+
             <Label Text="{Binding DeviceName}"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
 
+            <ListView Grid.Row="1" 
+                  ItemsSource="{Binding Pixel}" 
+                  SelectedItem="{Binding SelectedPixel, Mode=TwoWay}"
+                  >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid>
+                                <Label BackgroundColor="{Binding Property.BackgroundColor}"/>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
 
             <Grid>
                 <Label Grid.Row="0" Grid.Column="0" Text="Number of rows"/>

@@ -3,7 +3,9 @@ using Plugin.BLE;
 using Plugin.BLE.Abstractions.Contracts;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Numerics;
 using System.Text;
 using Xamarin.Forms;
 
@@ -58,6 +60,34 @@ namespace navtest.ViewModels
             }
         }
 
+        private ObservableCollection<Pixel> _pixel;
+        public ObservableCollection<Pixel> Pixel
+        {
+            get
+            {
+                return _pixel;
+            }
+            set
+            {
+                _pixel = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public Pixel SelectedPixel
+        {
+            get => null;
+            set
+            {
+                if (value != null)
+                {
+                    HandleSelectedPixel(value);
+                }
+
+                RaisePropertyChanged();
+            }
+        }
+
         public Command PixelCommand { get; set; }
         public Command EraseCommand { get; set; }
 
@@ -88,16 +118,6 @@ namespace navtest.ViewModels
 
             try
             {
-                //UUID_WS2812B_PIXEL_CHAR = await UUID_WS2812B_SERVICE.GetCharacteristicAsync(Guid.Parse(UUID_WS2812B_PIXEL_CHAR_UID));
-                //for(int row=0; row < int.Parse(_lblRow); row++)
-                //{
-                //    for (int col = 0; col < int.Parse(_lblCol); col++)
-                //    {
-                //        byte[] data = { (byte)col, 0x00, (byte)row, 0x00, 0x00, 0x00, 0x00 };
-                //        await UUID_WS2812B_PIXEL_CHAR.WriteAsync(data);
-                //    }
-                //}
-
                 UUID_WS2812B_PICTURE_CHAR = await UUID_WS2812B_SERVICE.GetCharacteristicAsync(Guid.Parse(UUID_WS2812B_PICTURE_CHAR_UID));
 
                 var data = new byte[MAX_BLE_SIZE];
@@ -152,8 +172,9 @@ namespace navtest.ViewModels
             }
         }
 
-        public DeviceViewModel()
+        private void HandleSelectedPixel(Pixel pixel)
         {
+            Debug.WriteLine("Pushed Pixel x: "+pixel.X+", y: "+pixel.Y);
         }
 
         public DeviceViewModel(INavigation navigation)
@@ -164,6 +185,8 @@ namespace navtest.ViewModels
             adapter = CrossBluetoothLE.Current.Adapter;
             connectedDevice = BaseViewModel.connectedDevice;
 
+            _pixel = new ObservableCollection<Pixel>();
+
             PixelCommand = new Command(() => sendPixel());
             EraseCommand = new Command(() => erasePixel());
 
@@ -172,6 +195,15 @@ namespace navtest.ViewModels
             _lblCol = "na";
 
             LoadServicesWS2812B();
+
+            for( int i=0; i<4; i++ )
+            {
+                Pixel pixel;
+                pixel = new Pixel(0, i);
+                pixel.Property.BackgroundColor = Color.FromRgb(50, 50, 50);
+                pixel.Property.Text = "test";
+                _pixel.Add(pixel);
+            }
 
             // register callbacks
             //ble.StateChanged += OnStateChanged;
@@ -191,14 +223,8 @@ namespace navtest.ViewModels
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message, "Error while discovering services");
-                //await _userDialogs.AlertAsync(ex.Message, "Error while discovering services");
-                //Trace.Message(ex.Message);
-                //await _navigation.ChangePresentation(new MvxPopToRootPresentationHint());
+                await App.Current.MainPage.DisplayAlert("Error", "Error while discovering services", "OK");
             }
-            //finally
-            //{
-            //    _userDialogs.HideLoading();
-            //}
 
             try
             {
@@ -211,14 +237,8 @@ namespace navtest.ViewModels
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message, "Error while discovering characteristics");
-                //await _userDialogs.AlertAsync(ex.Message, "Error while discovering characteristics");
-                //Trace.Message(ex.Message);
-                //await _navigation.ChangePresentation(new MvxPopToRootPresentationHint());
+                await App.Current.MainPage.DisplayAlert("Error", "Error while discovering characteristics", "OK");
             }
-            //finally
-            //{
-            //    _userDialogs.HideLoading();
-            //}
 
             try
             {
@@ -257,14 +277,8 @@ namespace navtest.ViewModels
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message, "Error while reading characteristics");
-                //await _userDialogs.AlertAsync(ex.Message, "Error while reading characteristics");
-                //Trace.Message(ex.Message);
-                //await _navigation.ChangePresentation(new MvxPopToRootPresentationHint());
+                await App.Current.MainPage.DisplayAlert("Error", "Error while reading characteristics", "OK");
             }
-            //finally
-            //{
-            //    _userDialogs.HideLoading();
-            //}
         }
 
     }
