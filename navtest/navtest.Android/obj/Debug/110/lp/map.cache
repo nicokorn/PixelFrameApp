@@ -1,7 +1,11 @@
 Acr.UserDialogs.dll
 AndHUD.dll
+ColorPicker.Android.dll
 FormsViewGroup.dll
 Plugin.BLE.dll
+SkiaSharp.dll
+SkiaSharp.Views.Android.dll
+SkiaSharp.Views.Forms.dll
 Xamarin.AndroidX.Activity.dll
 Xamarin.AndroidX.Annotation.dll
 Xamarin.AndroidX.Annotation.Experimental.dll

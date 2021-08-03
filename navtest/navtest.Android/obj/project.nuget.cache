@@ -1,12 +1,17 @@
 {
   "version": 2,
-  "dgSpecHash": "ISJ0hLI0lHSyPUfPb0v0AEv8PexDYJkv+MBmx9moHyp2u3LCJYSTPI+Z8dpgm+upZehaaDarcl40pR2EmS6NfQ==",
+  "dgSpecHash": "IDtJ57liVbmIlavkmmWhyHl5ITeaE0MOFADFhI4XjZv258waP6CB/tO0VFMz8idmC9lxAioTPEvIHZgA8rTbjA==",
   "success": true,
   "projectFilePath": "C:\\Users\\nico1\\OneDrive\\Documents\\GitHub\\XAMARIN_WS2812B\\navtest\\navtest.Android\\navtest.Android.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\nico1\\.nuget\\packages\\acr.userdialogs\\7.1.0.514\\acr.userdialogs.7.1.0.514.nupkg.sha512",
     "C:\\Users\\nico1\\.nuget\\packages\\andhud\\1.4.2\\andhud.1.4.2.nupkg.sha512",
+    "C:\\Users\\nico1\\.nuget\\packages\\colormineportable\\2.0.1\\colormineportable.2.0.1.nupkg.sha512",
+    "C:\\Users\\nico1\\.nuget\\packages\\colorpicker.xamarin.forms\\1.3.4.11\\colorpicker.xamarin.forms.1.3.4.11.nupkg.sha512",
     "C:\\Users\\nico1\\.nuget\\packages\\plugin.ble\\2.1.2\\plugin.ble.2.1.2.nupkg.sha512",
+    "C:\\Users\\nico1\\.nuget\\packages\\skiasharp\\1.68.3\\skiasharp.1.68.3.nupkg.sha512",
+    "C:\\Users\\nico1\\.nuget\\packages\\skiasharp.views\\1.68.3\\skiasharp.views.1.68.3.nupkg.sha512",
+    "C:\\Users\\nico1\\.nuget\\packages\\skiasharp.views.forms\\1.68.3\\skiasharp.views.forms.1.68.3.nupkg.sha512",
     "C:\\Users\\nico1\\.nuget\\packages\\system.numerics.vectors\\4.5.0\\system.numerics.vectors.4.5.0.nupkg.sha512",
     "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\xamarin.androidx.activity\\1.1.0.5\\xamarin.androidx.activity.1.1.0.5.nupkg.sha512",
     "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\xamarin.androidx.annotation\\1.1.0.8\\xamarin.androidx.annotation.1.1.0.8.nupkg.sha512",

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:colorpicker="clr-namespace:ColorPicker;assembly=ColorPicker"
              x:Class="navtest.Views.DeviceView">
     <ContentPage.Content>
         <StackLayout>
@@ -34,15 +34,12 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
 
-            <Grid>
-                <Label Grid.Row="0" Grid.Column="0" Text="Number of rows"/>
-                <Label Grid.Row="0" Grid.Column="1" Text="{Binding LblRow}"/>
-                <Label Grid.Row="1" Grid.Column="0" Text="Number of cols"/>
-                <Label Grid.Row="1" Grid.Column="1" Text="{Binding LblCol}"/>
-            </Grid>
+            <colorpicker:HSLSliders 
+                x:Name="HSLSliders1"
+                SelectedColor="{Binding SelectedColor, Mode=TwoWay}"
+                ShowAlphaSlider="False"/>
 
-            <Button Text="Magic!" Command="{Binding PixelCommand}" IsEnabled="True" />
-            <Button Text="Erase!" Command="{Binding EraseCommand}" IsEnabled="True" />
+            <Button Text="Clear the frame" Command="{Binding EraseCommand}" IsEnabled="True" />
 
         </StackLayout>
     </ContentPage.Content>

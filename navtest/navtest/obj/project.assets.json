@@ -11,6 +11,30 @@
           "lib/netstandard2.0/Acr.UserDialogs.dll": {}
         }
       },
+      "ColorMinePortable/2.0.1": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/ColorMinePortable.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/ColorMinePortable.dll": {}
+        }
+      },
+      "ColorPicker.Xamarin.Forms/1.3.4.11": {
+        "type": "package",
+        "dependencies": {
+          "ColorMinePortable": "2.0.1",
+          "SkiaSharp": "1.60.3",
+          "SkiaSharp.Views.Forms": "1.60.3",
+          "Xamarin.Forms": "4.7.0.968"
+        },
+        "compile": {
+          "lib/netstandard2.0/ColorPicker.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/ColorPicker.dll": {}
+        }
+      },
       "Microsoft.NETCore.Platforms/1.1.0": {
         "type": "package",
         "compile": {
@@ -44,6 +68,50 @@
         "runtime": {
           "lib/netstandard2.0/Plugin.BLE.Abstractions.dll": {},
           "lib/netstandard2.0/Plugin.BLE.dll": {}
+        }
+      },
+      "SkiaSharp/1.60.3": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard1.3/SkiaSharp.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.3/SkiaSharp.dll": {}
+        },
+        "runtimeTargets": {
+          "runtimes/osx/native/libSkiaSharp.dylib": {
+            "assetType": "native",
+            "rid": "osx"
+          },
+          "runtimes/tizen-armel/native/libSkiaSharp.so": {
+            "assetType": "native",
+            "rid": "tizen-armel"
+          },
+          "runtimes/tizen-x86/native/libSkiaSharp.so": {
+            "assetType": "native",
+            "rid": "tizen-x86"
+          },
+          "runtimes/win7-x64/native/libSkiaSharp.dll": {
+            "assetType": "native",
+            "rid": "win7-x64"
+          },
+          "runtimes/win7-x86/native/libSkiaSharp.dll": {
+            "assetType": "native",
+            "rid": "win7-x86"
+          }
+        }
+      },
+      "SkiaSharp.Views.Forms/1.60.3": {
+        "type": "package",
+        "dependencies": {
+          "SkiaSharp": "1.60.3",
+          "Xamarin.Forms": "2.5.0.280555"
+        },
+        "compile": {
+          "lib/netstandard1.3/SkiaSharp.Views.Forms.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.3/SkiaSharp.Views.Forms.dll": {}
         }
       },
       "System.Numerics.Vectors/4.5.0": {
@@ -120,6 +188,46 @@
         "lib/xamarintvos10/Acr.UserDialogs.pdb",
         "lib/xamarintvos10/Acr.UserDialogs.xml",
         "readme.txt"
+      ]
+    },
+    "ColorMinePortable/2.0.1": {
+      "sha512": "NKtXdqaYWxbIHXMgf8xyTDFCk/fGzb1/1DHrRYsv1wm0PRr1uzIwYVlu3QwxLG5D3aHfhh7N6rg1eJEHlPxQqg==",
+      "type": "package",
+      "path": "colormineportable/2.0.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "colormineportable.2.0.1.nupkg.sha512",
+        "colormineportable.nuspec",
+        "lib/netstandard2.0/ColorMinePortable.dll",
+        "lib/netstandard2.0/ColorMinePortable.xml"
+      ]
+    },
+    "ColorPicker.Xamarin.Forms/1.3.4.11": {
+      "sha512": "alOcHqyE0VRy7wRX6e+dmxIM/hYhbPxqrvfoC1TUHqpvhR7yqGTUbIx0DeZ0BFjBrE3Yc6mChFBliFWvsATc0A==",
+      "type": "package",
+      "path": "colorpicker.xamarin.forms/1.3.4.11",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "NuGet.icon.png",
+        "build/UAP10/ColorPicker.Xamarin.Forms.props",
+        "colorpicker.xamarin.forms.1.3.4.11.nupkg.sha512",
+        "colorpicker.xamarin.forms.nuspec",
+        "lib/MonoAndroid10/ColorPicker.Android.dll",
+        "lib/MonoAndroid10/ColorPicker.dll",
+        "lib/UAP10/ARM/ColorPicker.UWP.dll",
+        "lib/UAP10/ARM/ColorPicker.dll",
+        "lib/UAP10/ARM64/ColorPicker.UWP.dll",
+        "lib/UAP10/ARM64/ColorPicker.dll",
+        "lib/UAP10/x64/ColorPicker.UWP.dll",
+        "lib/UAP10/x64/ColorPicker.dll",
+        "lib/UAP10/x86/ColorPicker.UWP.dll",
+        "lib/UAP10/x86/ColorPicker.dll",
+        "lib/Xamarin.iOS10/ColorPicker.dll",
+        "lib/Xamarin.iOS10/ColorPicker.iOS.dll",
+        "lib/netstandard2.0/ColorPicker.dll",
+        "lib/netstandard2.1/ColorPicker.dll"
       ]
     },
     "Microsoft.NETCore.Platforms/1.1.0": {
@@ -300,6 +408,78 @@
         "lib/xamarinmac20/Plugin.BLE.macOS.xml",
         "plugin.ble.2.1.2.nupkg.sha512",
         "plugin.ble.nuspec"
+      ]
+    },
+    "SkiaSharp/1.60.3": {
+      "sha512": "9L8luXSspkXMhRuBx7CPjEVNJ2CJljpc5XMkDUITCQnhuJJadyCwYSWcAsgEqeRqmAimI2TyJWu73BRsvKTFZg==",
+      "type": "package",
+      "path": "skiasharp/1.60.3",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.txt",
+        "THIRD-PARTY-NOTICES.txt",
+        "build/net45/SkiaSharp.targets",
+        "build/tizen40/SkiaSharp.targets",
+        "lib/MonoAndroid/SkiaSharp.dll",
+        "lib/MonoAndroid/SkiaSharp.xml",
+        "lib/Xamarin.Mac20/SkiaSharp.dll",
+        "lib/Xamarin.Mac20/SkiaSharp.xml",
+        "lib/Xamarin.TVOS/SkiaSharp.dll",
+        "lib/Xamarin.TVOS/SkiaSharp.xml",
+        "lib/Xamarin.WatchOS/SkiaSharp.dll",
+        "lib/Xamarin.WatchOS/SkiaSharp.xml",
+        "lib/Xamarin.iOS/SkiaSharp.dll",
+        "lib/Xamarin.iOS/SkiaSharp.xml",
+        "lib/net45/SkiaSharp.dll",
+        "lib/net45/SkiaSharp.xml",
+        "lib/netstandard1.3/SkiaSharp.dll",
+        "lib/netstandard1.3/SkiaSharp.xml",
+        "lib/tizen40/SkiaSharp.dll",
+        "lib/tizen40/SkiaSharp.xml",
+        "lib/uap10.0/SkiaSharp.dll",
+        "lib/uap10.0/SkiaSharp.xml",
+        "runtimes/osx/native/libSkiaSharp.dylib",
+        "runtimes/tizen-armel/native/libSkiaSharp.so",
+        "runtimes/tizen-x86/native/libSkiaSharp.so",
+        "runtimes/win10-arm/nativeassets/uap10.0/libEGL.dll",
+        "runtimes/win10-arm/nativeassets/uap10.0/libGLESv2.dll",
+        "runtimes/win10-arm/nativeassets/uap10.0/libSkiaSharp.dll",
+        "runtimes/win10-x64/nativeassets/uap10.0/libEGL.dll",
+        "runtimes/win10-x64/nativeassets/uap10.0/libGLESv2.dll",
+        "runtimes/win10-x64/nativeassets/uap10.0/libSkiaSharp.dll",
+        "runtimes/win10-x86/nativeassets/uap10.0/libEGL.dll",
+        "runtimes/win10-x86/nativeassets/uap10.0/libGLESv2.dll",
+        "runtimes/win10-x86/nativeassets/uap10.0/libSkiaSharp.dll",
+        "runtimes/win7-x64/native/libSkiaSharp.dll",
+        "runtimes/win7-x86/native/libSkiaSharp.dll",
+        "skiasharp.1.60.3.nupkg.sha512",
+        "skiasharp.nuspec",
+        "xamarin.interactive/SkiaSharp.Workbooks.dll"
+      ]
+    },
+    "SkiaSharp.Views.Forms/1.60.3": {
+      "sha512": "AwxqM2sskGH0EKCbf1KmKbMq0NEj85k6VuTn8B1ghivCFn2VomsfxtILUsIpSjydE67VdYStVUbn/fEtsHsPgQ==",
+      "type": "package",
+      "path": "skiasharp.views.forms/1.60.3",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.txt",
+        "lib/MonoAndroid/SkiaSharp.Views.Forms.dll",
+        "lib/MonoAndroid/SkiaSharp.Views.Forms.xml",
+        "lib/Xamarin.Mac20/SkiaSharp.Views.Forms.dll",
+        "lib/Xamarin.Mac20/SkiaSharp.Views.Forms.xml",
+        "lib/Xamarin.iOS/SkiaSharp.Views.Forms.dll",
+        "lib/Xamarin.iOS/SkiaSharp.Views.Forms.xml",
+        "lib/netstandard1.3/SkiaSharp.Views.Forms.dll",
+        "lib/netstandard1.3/SkiaSharp.Views.Forms.xml",
+        "lib/tizen40/SkiaSharp.Views.Forms.dll",
+        "lib/tizen40/SkiaSharp.Views.Forms.xml",
+        "lib/uap10.0/SkiaSharp.Views.Forms.dll",
+        "lib/uap10.0/SkiaSharp.Views.Forms.xml",
+        "skiasharp.views.forms.1.60.3.nupkg.sha512",
+        "skiasharp.views.forms.nuspec"
       ]
     },
     "System.Numerics.Vectors/4.5.0": {
@@ -620,6 +800,7 @@
   "projectFileDependencyGroups": {
     ".NETStandard,Version=v2.0": [
       "Acr.UserDialogs >= 7.1.0.514",
+      "ColorPicker.Xamarin.Forms >= 1.3.4.11",
       "NETStandard.Library >= 2.0.3",
       "Plugin.BLE >= 2.1.2",
       "Xamarin.Essentials >= 1.6.1",
@@ -673,6 +854,10 @@
           "Acr.UserDialogs": {
             "target": "Package",
             "version": "[7.1.0.514, )"
+          },
+          "ColorPicker.Xamarin.Forms": {
+            "target": "Package",
+            "version": "[1.3.4.11, )"
           },
           "NETStandard.Library": {
             "suppressParent": "All",

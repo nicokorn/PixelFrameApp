@@ -79,11 +79,21 @@ namespace navtest.ViewModels
             get => null;
             set
             {
-                if (value != null)
-                {
-                    HandleSelectedPixel(value);
-                }
+                HandleSelectedPixel(value);
+                RaisePropertyChanged();
+            }
+        }
 
+        private Color _selectedColor;
+        public Color SelectedColor
+        {
+            get
+            {
+                return _selectedColor;
+            }
+            set
+            {
+                HandleSelectedColor(value);
                 RaisePropertyChanged();
             }
         }
@@ -105,10 +115,10 @@ namespace navtest.ViewModels
         public Command PixelCommand { get; set; }
         public Command EraseCommand { get; set; }
 
-        private async void sendPixel()
+        private async void sendPixelRandom()
         {
             Random rnd = new Random();
-            Debug.WriteLine("Send pixel");
+            Debug.WriteLine("Send pixel random");
             int row = rnd.Next() % int.Parse(_lblRow);
             int col = rnd.Next() % int.Parse(_lblCol);
             byte[] data = { (byte)row, 0x00, (byte)col, 0x00, (byte)rnd.Next(), (byte)rnd.Next(), (byte)rnd.Next() };
@@ -120,9 +130,23 @@ namespace navtest.ViewModels
             }
             catch (Exception ex)
             {
+                Debug.WriteLine(ex.Message, "Error while sending random pixel characteristics");
+            }
+        }
+
+        private async void sendPixel( int col, int row, int r, int g, int b )
+        {
+            Debug.WriteLine("Send pixel");
+            byte[] data = { (byte)row, 0x00, (byte)col, 0x00, (byte)r, (byte)g, (byte)b };
+
+            try
+            {
+                UUID_WS2812B_PIXEL_CHAR = await UUID_WS2812B_SERVICE.GetCharacteristicAsync(Guid.Parse(UUID_WS2812B_PIXEL_CHAR_UID));
+                await UUID_WS2812B_PIXEL_CHAR.WriteAsync(data);
+            }
+            catch (Exception ex)
+            {
                 Debug.WriteLine(ex.Message, "Error while sending pixel characteristics");
-                //_userDialogs.HideLoading();
-                //await _userDialogs.AlertAsync(ex.Message);
             }
         }
 
@@ -188,8 +212,19 @@ namespace navtest.ViewModels
 
         private void HandleSelectedPixel(Pixel pixel)
         {
-            pixel.Property.BackgroundColor = Color.FromRgb(255, 0, 0);
+            pixel.Property.BackgroundColor = _selectedColor;
+            sendPixel( pixel.X, pixel.Y, (int)(_selectedColor.R * 255), (int)(_selectedColor.G * 255), (int)(_selectedColor.B * 255) );
             Debug.WriteLine("Pushed Pixel x: "+pixel.X+", y: "+pixel.Y);
+        }
+
+        private void HandleSelectedColor(Color color)
+        {
+            _selectedColor = color;
+            Debug.WriteLine("Color selected");
+        }
+
+        private void clearFrame()
+        {
         }
 
         public DeviceViewModel(INavigation navigation)
@@ -203,7 +238,7 @@ namespace navtest.ViewModels
             _frameCol = new ObservableCollection<ObservableCollection<Pixel>>();
             _pixel = new ObservableCollection<Pixel>();
 
-            PixelCommand = new Command(() => sendPixel());
+            PixelCommand = new Command(() => sendPixelRandom());
             EraseCommand = new Command(() => erasePixel());
 
             _deviceName = connectedDevice.Name;
@@ -212,13 +247,15 @@ namespace navtest.ViewModels
 
             LoadServicesWS2812B();
 
-            for( int y=0; y<15; y++ )
+            _selectedColor = Color.FromRgb(0, 0, 0);
+
+            for ( int x=0; x<15; x++ )
             {
-                for ( int x=0; x<15; x++ )
+                for ( int y=0; y<15; y++ )
                 {
                     Pixel pixel;
                     pixel = new Pixel(x, y);
-                    pixel.Property.BackgroundColor = Color.FromRgb(50, 50, 50);
+                    pixel.Property.BackgroundColor = Color.FromRgb(0, 0, 0);
                     pixel.Property.Text = "test";
                     _pixel.Add(pixel);
                 }

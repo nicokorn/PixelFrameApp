@@ -10,6 +10,7 @@
       "navtest/1.0.0": {
         "dependencies": {
           "Acr.UserDialogs": "7.1.0.514",
+          "ColorPicker.Xamarin.Forms": "1.3.4.11",
           "NETStandard.Library": "2.0.3",
           "Plugin.BLE": "2.1.2",
           "Xamarin.Essentials": "1.6.1",
@@ -24,6 +25,28 @@
           "lib/netstandard2.0/Acr.UserDialogs.dll": {
             "assemblyVersion": "7.1.0.514",
             "fileVersion": "7.1.0.514"
+          }
+        }
+      },
+      "ColorMinePortable/2.0.1": {
+        "runtime": {
+          "lib/netstandard2.0/ColorMinePortable.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "ColorPicker.Xamarin.Forms/1.3.4.11": {
+        "dependencies": {
+          "ColorMinePortable": "2.0.1",
+          "SkiaSharp": "1.60.3",
+          "SkiaSharp.Views.Forms": "1.60.3",
+          "Xamarin.Forms": "5.0.0.2012"
+        },
+        "runtime": {
+          "lib/netstandard2.0/ColorPicker.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
           }
         }
       },
@@ -42,6 +65,26 @@
           "lib/netstandard2.0/Plugin.BLE.dll": {
             "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "SkiaSharp/1.60.3": {
+        "runtime": {
+          "lib/netstandard1.3/SkiaSharp.dll": {
+            "assemblyVersion": "1.60.0.0",
+            "fileVersion": "1.60.3.0"
+          }
+        }
+      },
+      "SkiaSharp.Views.Forms/1.60.3": {
+        "dependencies": {
+          "SkiaSharp": "1.60.3",
+          "Xamarin.Forms": "5.0.0.2012"
+        },
+        "runtime": {
+          "lib/netstandard1.3/SkiaSharp.Views.Forms.dll": {
+            "assemblyVersion": "1.60.0.0",
+            "fileVersion": "1.60.3.0"
           }
         }
       },
@@ -95,6 +138,20 @@
       "path": "acr.userdialogs/7.1.0.514",
       "hashPath": "acr.userdialogs.7.1.0.514.nupkg.sha512"
     },
+    "ColorMinePortable/2.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-NKtXdqaYWxbIHXMgf8xyTDFCk/fGzb1/1DHrRYsv1wm0PRr1uzIwYVlu3QwxLG5D3aHfhh7N6rg1eJEHlPxQqg==",
+      "path": "colormineportable/2.0.1",
+      "hashPath": "colormineportable.2.0.1.nupkg.sha512"
+    },
+    "ColorPicker.Xamarin.Forms/1.3.4.11": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-alOcHqyE0VRy7wRX6e+dmxIM/hYhbPxqrvfoC1TUHqpvhR7yqGTUbIx0DeZ0BFjBrE3Yc6mChFBliFWvsATc0A==",
+      "path": "colorpicker.xamarin.forms/1.3.4.11",
+      "hashPath": "colorpicker.xamarin.forms.1.3.4.11.nupkg.sha512"
+    },
     "Microsoft.NETCore.Platforms/1.1.0": {
       "type": "package",
       "serviceable": true,
@@ -115,6 +172,20 @@
       "sha512": "sha512-TAFn7r6drfhmPAs+Zj+aaiWE1LdI9VOIJ1ryQaOpvHm9gNzN0C0yU8k0Dirsi0k6sNv3K642q0Scyc2V1nMlSg==",
       "path": "plugin.ble/2.1.2",
       "hashPath": "plugin.ble.2.1.2.nupkg.sha512"
+    },
+    "SkiaSharp/1.60.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-9L8luXSspkXMhRuBx7CPjEVNJ2CJljpc5XMkDUITCQnhuJJadyCwYSWcAsgEqeRqmAimI2TyJWu73BRsvKTFZg==",
+      "path": "skiasharp/1.60.3",
+      "hashPath": "skiasharp.1.60.3.nupkg.sha512"
+    },
+    "SkiaSharp.Views.Forms/1.60.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-AwxqM2sskGH0EKCbf1KmKbMq0NEj85k6VuTn8B1ghivCFn2VomsfxtILUsIpSjydE67VdYStVUbn/fEtsHsPgQ==",
+      "path": "skiasharp.views.forms/1.60.3",
+      "hashPath": "skiasharp.views.forms.1.60.3.nupkg.sha512"
     },
     "System.Numerics.Vectors/4.5.0": {
       "type": "package",
