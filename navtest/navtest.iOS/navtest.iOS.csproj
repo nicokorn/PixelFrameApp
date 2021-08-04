@@ -126,6 +126,9 @@
     <PackageReference Include="ColorPicker.Xamarin.Forms">
       <Version>1.3.4.11</Version>
     </PackageReference>
+    <PackageReference Include="Corcav.Behaviors">
+      <Version>2.3.7</Version>
+    </PackageReference>
     <PackageReference Include="Plugin.BLE">
       <Version>2.1.2</Version>
     </PackageReference>

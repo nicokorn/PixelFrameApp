@@ -11,6 +11,7 @@
         "dependencies": {
           "Acr.UserDialogs": "7.1.0.514",
           "ColorPicker.Xamarin.Forms": "1.3.4.11",
+          "Corcav.Behaviors": "2.3.7",
           "NETStandard.Library": "2.0.3",
           "Plugin.BLE": "2.1.2",
           "Xamarin.Essentials": "1.6.1",
@@ -47,6 +48,17 @@
           "lib/netstandard2.0/ColorPicker.dll": {
             "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Corcav.Behaviors/2.3.7": {
+        "dependencies": {
+          "Xamarin.Forms": "5.0.0.2012"
+        },
+        "runtime": {
+          "lib/Corcav.Behaviors.dll": {
+            "assemblyVersion": "2.3.7.0",
+            "fileVersion": "2.3.7.0"
           }
         }
       },
@@ -151,6 +163,13 @@
       "sha512": "sha512-alOcHqyE0VRy7wRX6e+dmxIM/hYhbPxqrvfoC1TUHqpvhR7yqGTUbIx0DeZ0BFjBrE3Yc6mChFBliFWvsATc0A==",
       "path": "colorpicker.xamarin.forms/1.3.4.11",
       "hashPath": "colorpicker.xamarin.forms.1.3.4.11.nupkg.sha512"
+    },
+    "Corcav.Behaviors/2.3.7": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-gUZNL9cMavD8NNgnUq8x98t8hbvYuxf08279DUTYY7S6LzGNo/tvK8xi69s87RHqMs1gLXW8rpHiNwxB01V4kQ==",
+      "path": "corcav.behaviors/2.3.7",
+      "hashPath": "corcav.behaviors.2.3.7.nupkg.sha512"
     },
     "Microsoft.NETCore.Platforms/1.1.0": {
       "type": "package",

@@ -85,6 +85,10 @@ namespace navtest.ViewModels
             }
         }
 
+        public Command RefreshCommand { get; set; }
+        public Command ScanCommand { get; set; }
+        public Command AppearingCommand { get; set; }
+        public Command DisappearingCommand { get; set; }
 
         public ScanViewModel()
         {
@@ -96,6 +100,8 @@ namespace navtest.ViewModels
 
             RefreshCommand = new Command(() => OnStartScan(), () => ScanEnabled);
             ScanCommand = new Command(() => OnStartScan(), () => ScanEnabled);
+            AppearingCommand = new Command(() => OnAppearing());
+            DisappearingCommand = new Command(() => OnDisappearing());
 
             _isRefreshing = false;
             _scanEnabled = true;
@@ -136,12 +142,12 @@ namespace navtest.ViewModels
 
         private void OnDeviceDisconnected(object sender, DeviceEventArgs args)
         {
-
+            Debug.WriteLine("Disconnected from device!");
         }
 
         private void OnDeviceConnectionLost(object sender, DeviceEventArgs args)
         {
-
+            Debug.WriteLine("Connection lost to device!");
         }
 
         public async void bleScan()
@@ -171,13 +177,9 @@ namespace navtest.ViewModels
             }
         }
 
-        public Command RefreshCommand { get; set; }
-
-        public Command ScanCommand { get; set; }
-
         private void OnStartScan()
         {
-            System.Diagnostics.Debug.WriteLine("Scan button clicked!");
+            System.Diagnostics.Debug.WriteLine("Scanning!");
             bleScan();
             _scanEnabled = false;
             _isRefreshing = false;
@@ -212,6 +214,16 @@ namespace navtest.ViewModels
                 Debug.WriteLine(ex.Message, "Connection error");
                 return false;
             }
+        }
+
+        private void OnAppearing()
+        {
+            DisconnectDeviceCurrent();
+            //OnStartScan();
+        }
+
+        private void OnDisappearing()
+        {
         }
 
         private async void DisconnectDevice(NativeDevice device)

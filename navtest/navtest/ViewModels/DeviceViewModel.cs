@@ -1,6 +1,8 @@
 ﻿using navtest.Models;
+using navtest.Views;
 using Plugin.BLE;
 using Plugin.BLE.Abstractions.Contracts;
+using Plugin.BLE.Abstractions.EventArgs;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -121,10 +123,11 @@ namespace navtest.ViewModels
             }
         }
 
-        private async void sendPixel( Pixel pixel, int col, int row, int r, int g, int b )
+        private async void sendPixel(Pixel pixel, int col, int row, int r, int g, int b)
         {
             Debug.WriteLine("Send pixel");
             byte[] data = { (byte)row, 0x00, (byte)col, 0x00, (byte)r, (byte)g, (byte)b };
+            Color tempColor = pixel.Property.BackgroundColor;
 
             try
             {
@@ -134,6 +137,7 @@ namespace navtest.ViewModels
             }
             catch (Exception ex)
             {
+                pixel.Property.BackgroundColor = tempColor;
                 Debug.WriteLine(ex.Message, "Error while sending pixel characteristics");
                 //await App.Current.MainPage.DisplayAlert("Error", "Error while sending pixel characteristics", "OK");
             }
@@ -149,12 +153,12 @@ namespace navtest.ViewModels
 
                 var data = new byte[MAX_BLE_SIZE];
                 int pixelcount = int.Parse(_lblCol) * int.Parse(_lblRow);
-                int bytecount = pixelcount*3; // because 1 pixel = 3*8bit
+                int bytecount = pixelcount * 3; // because 1 pixel = 3*8bit
                 int packetcount = bytecount / MAX_PICTURE_PAYLOAD + 1;
                 int offset;
                 int size;
 
-                for (int packetnr=0; packetnr < packetcount; packetnr++)
+                for (int packetnr = 0; packetnr < packetcount; packetnr++)
                 {
                     // set header
                     offset = packetnr * MAX_PICTURE_PAYLOAD;
@@ -162,14 +166,14 @@ namespace navtest.ViewModels
                     data[0] = offsetB[0];
                     data[1] = offsetB[1];
 
-                    if(packetnr== packetcount-1)
+                    if (packetnr == packetcount - 1)
                     {
                         // last packet
                         size = bytecount % MAX_PICTURE_PAYLOAD;
                         byte[] sizeB = BitConverter.GetBytes(size);
                         data[2] = sizeB[0];
                         data[3] = sizeB[1];
-                        data[4] = 1;
+                        data[4] = BIT_BIT_REFRESH;
                     }
                     else
                     {
@@ -181,14 +185,14 @@ namespace navtest.ViewModels
                     }
 
                     // set picture data (3*8bits=1pixel)
-                    for(int pixelbyte=0; pixelbyte < size; pixelbyte++)
+                    for (int pixelbyte = 0; pixelbyte < size; pixelbyte++)
                     {
                         data[PICTURE_HEADER_OFFSET + pixelbyte] = 0x00;
                     }
 
                     // send the packet
                     await UUID_WS2812B_PICTURE_CHAR.WriteAsync(data);
-                    Debug.WriteLine("Packet: "+(packetnr+1)+"/"+ packetcount + " sended, with "+(size+4)+" bytes");
+                    Debug.WriteLine("Packet: " + (packetnr + 1) + "/" + packetcount + " sended, with " + (size + 4) + " bytes");
                 }
             }
             catch (Exception ex)
@@ -213,12 +217,12 @@ namespace navtest.ViewModels
                 data[1] = 0x00;
                 data[2] = 0x00;
                 data[3] = 0x00;
-                data[4] = 0x02; // clear frame cmd bit
+                data[4] = BIT_BIT_CLEARALL | BIT_BIT_REFRESH; // clear frame cmd bit
 
                 // send the packet
                 await UUID_WS2812B_PICTURE_CHAR.WriteAsync(data);
                 Debug.WriteLine("Send clear frame cmd");
-                
+
             }
             catch (Exception ex)
             {
@@ -231,8 +235,8 @@ namespace navtest.ViewModels
 
         private void HandleSelectedPixel(Pixel pixel)
         {
-            sendPixel( pixel, pixel.X, pixel.Y, (int)(_selectedColor.R * 255), (int)(_selectedColor.G * 255), (int)(_selectedColor.B * 255) );
-            Debug.WriteLine("Pushed Pixel x: "+pixel.X+", y: "+pixel.Y);
+            sendPixel(pixel, pixel.X, pixel.Y, (int)(_selectedColor.R * 255), (int)(_selectedColor.G * 255), (int)(_selectedColor.B * 255));
+            Debug.WriteLine("Pushed Pixel x: " + pixel.X + ", y: " + pixel.Y);
         }
 
         private void HandleSelectedColor(Color color)
@@ -244,25 +248,25 @@ namespace navtest.ViewModels
         private void clearFrameApp()
         {
             // for Version
-            for ( int i = 0; i < _pixel.Count; i++ )
+            for (int i = 0; i < _pixel.Count; i++)
             {
                 _pixel[i].Property.BackgroundColor = Color.FromRgb(0, 0, 0);
             }
             //RaisePropertyChanged("_pixel");
         }
 
-        private void setFrameApp( byte[] data, int size )
+        private void setFrameApp(byte[] data, int size)
         {
-            if( (size/3) >= _pixel.Count )
+            if ((size / 3) >= _pixel.Count)
             {
                 Debug.WriteLine("Error size is to big for the frame");
                 return;
             }
 
             // for Version
-            for ( int i = 0; i < _pixel.Count; i++ )
+            for (int i = 0; i < _pixel.Count; i++)
             {
-                _pixel[i].Property.BackgroundColor = Color.FromRgb( data[3*i], data[3*i+1], data[3*i+2]);
+                _pixel[i].Property.BackgroundColor = Color.FromRgb(data[3 * i], data[3 * i + 1], data[3 * i + 2]);
             }
             //RaisePropertyChanged("_pixel");
         }
@@ -299,14 +303,12 @@ namespace navtest.ViewModels
                 }
             }
 
-            
-
             // register callbacks
             //ble.StateChanged += OnStateChanged;
             //adapter.DeviceDiscovered += OnDeviceDiscovered;
             //adapter.ScanTimeoutElapsed += Adapter_ScanTimeoutElapsed;
-            //adapter.DeviceDisconnected += OnDeviceDisconnected;
-            //adapter.DeviceConnectionLost += OnDeviceConnectionLost;
+            adapter.DeviceDisconnected += OnDeviceDisconnected;
+            adapter.DeviceConnectionLost += OnDeviceConnectionLost;
         }
 
         private async void LoadServicesWS2812B()
@@ -377,5 +379,20 @@ namespace navtest.ViewModels
             }
         }
 
+        private void OnDeviceDisconnected(object sender, DeviceEventArgs args)
+        {
+            goBackNavigation();
+            Debug.WriteLine("Disconnected from device!");
+        }
+
+        private void OnDeviceConnectionLost(object sender, DeviceEventArgs args)
+        {
+            goBackNavigation();
+            Debug.WriteLine("Connection lost to device!");
+        }
+        private async void goBackNavigation()
+        {
+            await this.navigation.PopAsync();
+        }
     }
 }

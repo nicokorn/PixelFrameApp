@@ -18,10 +18,5 @@ namespace navtest.Views
             InitializeComponent();
             this.BindingContext = new ScanViewModel(this.Navigation);
         }
-
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-        }
     }
 }

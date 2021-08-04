@@ -6,6 +6,7 @@
              xmlns:colorpicker="clr-namespace:ColorPicker;assembly=ColorPicker"
              xmlns:forms="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
              mc:Ignorable="d"
+             Title="Frame controller"
              x:Class="navtest.Views.DeviceView">
     <ContentPage.Content>
         <StackLayout>
@@ -13,7 +14,6 @@
             <Label 
                 Text="Frame preview"
                 FontAttributes="Bold"
-                FontSize="25"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
 
@@ -22,6 +22,10 @@
                 SelectionMode="Single"
                 SelectedItem="{Binding SelectedPixel, Mode=TwoWay}"
                 ItemsLayout="VerticalGrid,15" 
+                Scale="0.95"
+                VerticalScrollBarVisibility="Never"
+                HorizontalScrollBarVisibility="Never"
+                HeightRequest="480"
                 >
                 <CollectionView.ItemTemplate>
                     <DataTemplate>

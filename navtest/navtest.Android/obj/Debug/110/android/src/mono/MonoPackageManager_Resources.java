@@ -8,6 +8,7 @@ public class MonoPackageManager_Resources {
 		"ColorMinePortable.dll",
 		"ColorPicker.Android.dll",
 		"ColorPicker.dll",
+		"Corcav.Behaviors.dll",
 		"FormsViewGroup.dll",
 		"navtest.dll",
 		"Plugin.BLE.Abstractions.dll",

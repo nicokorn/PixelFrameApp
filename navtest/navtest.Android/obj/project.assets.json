@@ -53,6 +53,18 @@
           "lib/MonoAndroid10/ColorPicker.dll": {}
         }
       },
+      "Corcav.Behaviors/2.3.7": {
+        "type": "package",
+        "dependencies": {
+          "Xamarin.Forms": "2.3.4.231"
+        },
+        "compile": {
+          "lib/dotnet/Corcav.Behaviors.dll": {}
+        },
+        "runtime": {
+          "lib/dotnet/Corcav.Behaviors.dll": {}
+        }
+      },
       "Plugin.BLE/2.1.2": {
         "type": "package",
         "compile": {
@@ -1096,6 +1108,7 @@
         "dependencies": {
           "Acr.UserDialogs": "7.1.0.514",
           "ColorPicker.Xamarin.Forms": "1.3.4.11",
+          "Corcav.Behaviors": "2.3.7",
           "Plugin.BLE": "2.1.2",
           "Xamarin.Essentials": "1.6.1",
           "Xamarin.Forms": "5.0.0.2012"
@@ -1195,6 +1208,23 @@
         "lib/Xamarin.iOS10/ColorPicker.iOS.dll",
         "lib/netstandard2.0/ColorPicker.dll",
         "lib/netstandard2.1/ColorPicker.dll"
+      ]
+    },
+    "Corcav.Behaviors/2.3.7": {
+      "sha512": "gUZNL9cMavD8NNgnUq8x98t8hbvYuxf08279DUTYY7S6LzGNo/tvK8xi69s87RHqMs1gLXW8rpHiNwxB01V4kQ==",
+      "type": "package",
+      "path": "corcav.behaviors/2.3.7",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "corcav.behaviors.2.3.7.nupkg.sha512",
+        "corcav.behaviors.nuspec",
+        "lib/Corcav.Behaviors.XML",
+        "lib/Corcav.Behaviors.dll",
+        "lib/Corcav.Behaviors.pdb",
+        "lib/dotnet/Corcav.Behaviors.XML",
+        "lib/dotnet/Corcav.Behaviors.dll",
+        "lib/dotnet/Corcav.Behaviors.pdb"
       ]
     },
     "Plugin.BLE/2.1.2": {
@@ -2502,6 +2532,7 @@
   "projectFileDependencyGroups": {
     "MonoAndroid,Version=v11.0": [
       "ColorPicker.Xamarin.Forms >= 1.3.4.11",
+      "Corcav.Behaviors >= 2.3.7",
       "Plugin.BLE >= 2.1.2",
       "Xamarin.Essentials >= 1.6.1",
       "Xamarin.Forms >= 5.0.0.2012",
@@ -2553,6 +2584,10 @@
           "ColorPicker.Xamarin.Forms": {
             "target": "Package",
             "version": "[1.3.4.11, )"
+          },
+          "Corcav.Behaviors": {
+            "target": "Package",
+            "version": "[2.3.7, )"
           },
           "Plugin.BLE": {
             "target": "Package",

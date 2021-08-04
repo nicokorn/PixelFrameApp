@@ -38,6 +38,9 @@ namespace navtest.ViewModels
         protected const int MAX_BLE_SIZE = 506;
         protected const int MAX_PICTURE_PAYLOAD = MAX_BLE_SIZE - PICTURE_HEADER_OFFSET; // payload X size needs to be X%3=0!
 
+        protected const int BIT_BIT_REFRESH = 0x01;
+        protected const int BIT_BIT_CLEARALL = 0x02;
+
         protected void RaisePropertyChanged([CallerMemberName] string caller = "")
         {
             if (PropertyChanged != null)
