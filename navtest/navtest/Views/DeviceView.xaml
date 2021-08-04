@@ -9,12 +9,11 @@
              x:Class="navtest.Views.DeviceView">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="WS2812B Device Controller"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
 
-            <Label Text="Frame preview"
-                   FontAttributes="Bold"
+            <Label 
+                Text="Frame preview"
+                FontAttributes="Bold"
+                FontSize="25"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
 
@@ -33,16 +32,16 @@
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
-                            <Label BackgroundColor="{Binding Property.BackgroundColor}"/>
+                            <Label BackgroundColor="{Binding Property.BackgroundColor}" />
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
 
-            <colorpicker:HSLSliders 
+            <colorpicker:RGBSliders 
                 x:Name="HSLSliders1"
                 SelectedColor="{Binding SelectedColor, Mode=TwoWay}"
-                ShowAlphaSlider="False"/>
+                ShowAlphaSlider="False" />
 
             <Button 
                 Text="Send picture" 

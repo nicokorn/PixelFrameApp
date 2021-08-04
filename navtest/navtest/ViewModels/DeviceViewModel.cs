@@ -117,17 +117,18 @@ namespace navtest.ViewModels
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message, "Error while sending random pixel characteristics");
-                await App.Current.MainPage.DisplayAlert("Error", "Error while sending random pixel characteristics", "OK");
+                //await App.Current.MainPage.DisplayAlert("Error", "Error while sending random pixel characteristics", "OK");
             }
         }
 
-        private async void sendPixel( int col, int row, int r, int g, int b )
+        private async void sendPixel( Pixel pixel, int col, int row, int r, int g, int b )
         {
             Debug.WriteLine("Send pixel");
             byte[] data = { (byte)row, 0x00, (byte)col, 0x00, (byte)r, (byte)g, (byte)b };
 
             try
             {
+                pixel.Property.BackgroundColor = _selectedColor;
                 UUID_WS2812B_PIXEL_CHAR = await UUID_WS2812B_SERVICE.GetCharacteristicAsync(Guid.Parse(UUID_WS2812B_PIXEL_CHAR_UID));
                 await UUID_WS2812B_PIXEL_CHAR.WriteAsync(data);
             }
@@ -138,7 +139,7 @@ namespace navtest.ViewModels
             }
         }
 
-        private async void clearFrameTemp()
+        private async void sendPicture()
         {
             Debug.WriteLine("Erase all pixel");
 
@@ -230,8 +231,7 @@ namespace navtest.ViewModels
 
         private void HandleSelectedPixel(Pixel pixel)
         {
-            pixel.Property.BackgroundColor = _selectedColor;
-            sendPixel( pixel.X, pixel.Y, (int)(_selectedColor.R * 255), (int)(_selectedColor.G * 255), (int)(_selectedColor.B * 255) );
+            sendPixel( pixel, pixel.X, pixel.Y, (int)(_selectedColor.R * 255), (int)(_selectedColor.G * 255), (int)(_selectedColor.B * 255) );
             Debug.WriteLine("Pushed Pixel x: "+pixel.X+", y: "+pixel.Y);
         }
 
@@ -244,11 +244,27 @@ namespace navtest.ViewModels
         private void clearFrameApp()
         {
             // for Version
-            for (int i = 0; i < _pixel.Count; i++)
+            for ( int i = 0; i < _pixel.Count; i++ )
             {
                 _pixel[i].Property.BackgroundColor = Color.FromRgb(0, 0, 0);
             }
-            RaisePropertyChanged("_pixel");
+            //RaisePropertyChanged("_pixel");
+        }
+
+        private void setFrameApp( byte[] data, int size )
+        {
+            if( (size/3) >= _pixel.Count )
+            {
+                Debug.WriteLine("Error size is to big for the frame");
+                return;
+            }
+
+            // for Version
+            for ( int i = 0; i < _pixel.Count; i++ )
+            {
+                _pixel[i].Property.BackgroundColor = Color.FromRgb( data[3*i], data[3*i+1], data[3*i+2]);
+            }
+            //RaisePropertyChanged("_pixel");
         }
 
         public DeviceViewModel(INavigation navigation)
@@ -267,22 +283,23 @@ namespace navtest.ViewModels
             _deviceName = connectedDevice.Name;
             _lblRow = "na";
             _lblCol = "na";
+            _selectedColor = Color.FromRgb(0, 0, 0);
 
             LoadServicesWS2812B();
 
-            _selectedColor = Color.FromRgb(0, 0, 0);
-
-            for ( int x=0; x<15; x++ )
+            for (int x = 0; x < 15; x++)
             {
-                for ( int y=0; y<15; y++ )
+                for (int y = 0; y < 15; y++)
                 {
                     Pixel pixel;
                     pixel = new Pixel(x, y);
                     pixel.Property.BackgroundColor = Color.FromRgb(0, 0, 0);
-                    pixel.Property.Text = "test";
+                    pixel.Property.Text = "I am a pixel :-)";
                     _pixel.Add(pixel);
                 }
             }
+
+            
 
             // register callbacks
             //ble.StateChanged += OnStateChanged;
@@ -308,10 +325,10 @@ namespace navtest.ViewModels
             try
             {
                 // get characteristics of the service
-                UUID_WS2812B_CMD_CHAR = await UUID_WS2812B_SERVICE.GetCharacteristicAsync(Guid.Parse(UUID_WS2812B_CMD_CHAR_UID));
                 UUID_WS2812B_COL_CHAR = await UUID_WS2812B_SERVICE.GetCharacteristicAsync(Guid.Parse(UUID_WS2812B_COL_CHAR_UID));
                 UUID_WS2812B_ROW_CHAR = await UUID_WS2812B_SERVICE.GetCharacteristicAsync(Guid.Parse(UUID_WS2812B_ROW_CHAR_UID));
                 UUID_WS2812B_PIXEL_CHAR = await UUID_WS2812B_SERVICE.GetCharacteristicAsync(Guid.Parse(UUID_WS2812B_PIXEL_CHAR_UID));
+                UUID_WS2812B_PICTURE_CHAR = await UUID_WS2812B_SERVICE.GetCharacteristicAsync(Guid.Parse(UUID_WS2812B_PICTURE_CHAR_UID));
             }
             catch (Exception ex)
             {
@@ -321,7 +338,7 @@ namespace navtest.ViewModels
 
             try
             {
-                // set cols on the uid curer state notification
+                // set cols on the uid state notification
                 var bytesCOL = await UUID_WS2812B_COL_CHAR.ReadAsync();
                 if (Buffer.ByteLength(bytesCOL) > 0)
                 {
@@ -337,7 +354,7 @@ namespace navtest.ViewModels
                     await UUID_WS2812B_COL_CHAR.StartUpdatesAsync();
                 }
 
-                // set cols on the uid curer state notification
+                // set cols on the uid state notification
                 var bytesROW = await UUID_WS2812B_ROW_CHAR.ReadAsync();
                 if (Buffer.ByteLength(bytesCOL) > 0)
                 {

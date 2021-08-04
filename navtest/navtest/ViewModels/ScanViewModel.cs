@@ -218,5 +218,14 @@ namespace navtest.ViewModels
         {
             await adapter.DisconnectDeviceAsync(device.Device);
         }
+
+        public async void DisconnectDeviceCurrent()
+        {
+            if( connectedDevice!=null )
+            {
+                Debug.WriteLine("Disconnecting!");
+                await adapter.DisconnectDeviceAsync(connectedDevice.Device);
+            }
+        }
     }
 }
