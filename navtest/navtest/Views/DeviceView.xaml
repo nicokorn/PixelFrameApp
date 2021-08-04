@@ -1,6 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:colorpicker="clr-namespace:ColorPicker;assembly=ColorPicker"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:colorpicker="clr-namespace:ColorPicker;assembly=ColorPicker"
+             xmlns:forms="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
+             mc:Ignorable="d"
              x:Class="navtest.Views.DeviceView">
     <ContentPage.Content>
         <StackLayout>
@@ -23,7 +28,7 @@
                     <DataTemplate>
                         <Grid Padding="0.5">
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="30" />
+                                <RowDefinition Height="29" />
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
@@ -39,7 +44,15 @@
                 SelectedColor="{Binding SelectedColor, Mode=TwoWay}"
                 ShowAlphaSlider="False"/>
 
-            <Button Text="Clear the frame" Command="{Binding EraseCommand}" IsEnabled="True" />
+            <Button 
+                Text="Send picture" 
+                Command="{Binding EraseCommand}" 
+                IsEnabled="True" />
+
+            <Button 
+                Text="Clear the frame" 
+                Command="{Binding EraseCommand}" 
+                IsEnabled="True" />
 
         </StackLayout>
     </ContentPage.Content>

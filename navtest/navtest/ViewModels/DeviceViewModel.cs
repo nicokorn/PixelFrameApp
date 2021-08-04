@@ -98,20 +98,6 @@ namespace navtest.ViewModels
             }
         }
 
-        private ObservableCollection<ObservableCollection<Pixel>> _frameCol;
-        public ObservableCollection<ObservableCollection<Pixel>> FrameCol
-        {
-            get
-            {
-                return _frameCol;
-            }
-            set
-            {
-                _frameCol = value;
-                RaisePropertyChanged();
-            }
-        }
-
         public Command PixelCommand { get; set; }
         public Command EraseCommand { get; set; }
 
@@ -131,6 +117,7 @@ namespace navtest.ViewModels
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message, "Error while sending random pixel characteristics");
+                await App.Current.MainPage.DisplayAlert("Error", "Error while sending random pixel characteristics", "OK");
             }
         }
 
@@ -147,10 +134,11 @@ namespace navtest.ViewModels
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message, "Error while sending pixel characteristics");
+                //await App.Current.MainPage.DisplayAlert("Error", "Error while sending pixel characteristics", "OK");
             }
         }
 
-        private async void erasePixel()
+        private async void clearFrameTemp()
         {
             Debug.WriteLine("Erase all pixel");
 
@@ -205,9 +193,39 @@ namespace navtest.ViewModels
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message, "Error while sending picture");
-                //_userDialogs.HideLoading();
-                //await _userDialogs.AlertAsync(ex.Message);
+                await App.Current.MainPage.DisplayAlert("Error", "Error while sending picture", "OK");
             }
+
+            clearFrameApp();
+        }
+
+        private async void clearFrame()
+        {
+            Debug.WriteLine("Erase all pixel");
+
+            try
+            {
+                UUID_WS2812B_PICTURE_CHAR = await UUID_WS2812B_SERVICE.GetCharacteristicAsync(Guid.Parse(UUID_WS2812B_PICTURE_CHAR_UID));
+
+                var data = new byte[PICTURE_HEADER_OFFSET];
+                data[0] = 0x00;
+                data[1] = 0x00;
+                data[2] = 0x00;
+                data[3] = 0x00;
+                data[4] = 0x02; // clear frame cmd bit
+
+                // send the packet
+                await UUID_WS2812B_PICTURE_CHAR.WriteAsync(data);
+                Debug.WriteLine("Send clear frame cmd");
+                
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message, "Error while requesting to clear the frame");
+                await App.Current.MainPage.DisplayAlert("Error", "Error while requesting to clear the frame", "OK");
+            }
+
+            clearFrameApp();
         }
 
         private void HandleSelectedPixel(Pixel pixel)
@@ -223,8 +241,14 @@ namespace navtest.ViewModels
             Debug.WriteLine("Color selected");
         }
 
-        private void clearFrame()
+        private void clearFrameApp()
         {
+            // for Version
+            for (int i = 0; i < _pixel.Count; i++)
+            {
+                _pixel[i].Property.BackgroundColor = Color.FromRgb(0, 0, 0);
+            }
+            RaisePropertyChanged("_pixel");
         }
 
         public DeviceViewModel(INavigation navigation)
@@ -235,11 +259,10 @@ namespace navtest.ViewModels
             adapter = CrossBluetoothLE.Current.Adapter;
             connectedDevice = BaseViewModel.connectedDevice;
 
-            _frameCol = new ObservableCollection<ObservableCollection<Pixel>>();
             _pixel = new ObservableCollection<Pixel>();
 
             PixelCommand = new Command(() => sendPixelRandom());
-            EraseCommand = new Command(() => erasePixel());
+            EraseCommand = new Command(() => clearFrame());
 
             _deviceName = connectedDevice.Name;
             _lblRow = "na";
