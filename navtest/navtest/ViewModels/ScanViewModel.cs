@@ -192,6 +192,11 @@ namespace navtest.ViewModels
 
         private async void HandleSelectedDevice(NativeDevice device)
         {
+            //We have to test if the device is scanning 
+            if (ble.Adapter.IsScanning)
+            {
+                await adapter.StartScanningForDevicesAsync();
+            }
             await App.Current.MainPage.DisplayAlert("Connecting", "Connecting to device.", "OK");
             if ( await ConnectDeviceAsync(device) )
            {
