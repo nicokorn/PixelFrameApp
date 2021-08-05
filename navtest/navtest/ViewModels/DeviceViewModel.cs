@@ -184,6 +184,10 @@ namespace navtest.ViewModels
             {
                 for ( int x=xDelta/2; x<picture.Width; x+=xDelta )
                 {
+                    if( x>=picture.Width || y>=picture.Height || counter>=_pixel.Count )
+                    {
+                        break;
+                    }
                     pixelSKColor = picture.GetPixel(x, y);
                     _pixel[counter].Property.BackgroundColor = Color.FromRgb(pixelSKColor.Red, pixelSKColor.Green, pixelSKColor.Blue);
                     pictureParsed[counter * 3] = pixelSKColor.Red;
