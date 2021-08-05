@@ -14,6 +14,7 @@
           "Corcav.Behaviors": "2.3.7",
           "NETStandard.Library": "2.0.3",
           "Plugin.BLE": "2.1.2",
+          "System.Drawing.Common": "5.0.2",
           "Xamarin.Essentials": "1.6.1",
           "Xamarin.Forms": "5.0.0.2012"
         },
@@ -97,6 +98,14 @@
           "lib/netstandard1.3/SkiaSharp.Views.Forms.dll": {
             "assemblyVersion": "1.60.0.0",
             "fileVersion": "1.60.3.0"
+          }
+        }
+      },
+      "System.Drawing.Common/5.0.2": {
+        "runtime": {
+          "lib/netstandard2.0/System.Drawing.Common.dll": {
+            "assemblyVersion": "4.0.0.2",
+            "fileVersion": "4.6.29719.1"
           }
         }
       },
@@ -205,6 +214,13 @@
       "sha512": "sha512-AwxqM2sskGH0EKCbf1KmKbMq0NEj85k6VuTn8B1ghivCFn2VomsfxtILUsIpSjydE67VdYStVUbn/fEtsHsPgQ==",
       "path": "skiasharp.views.forms/1.60.3",
       "hashPath": "skiasharp.views.forms.1.60.3.nupkg.sha512"
+    },
+    "System.Drawing.Common/5.0.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-rvr/M1WPf24ljpvvrVd74+NdjRUJu1bBkspkZcnzSZnmAUQWSvanlQ0k/hVHk+cHufZbZfu7vOh/vYc0q5Uu/A==",
+      "path": "system.drawing.common/5.0.2",
+      "hashPath": "system.drawing.common.5.0.2.nupkg.sha512"
     },
     "System.Numerics.Vectors/4.5.0": {
       "type": "package",

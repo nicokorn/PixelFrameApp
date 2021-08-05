@@ -1,18 +1,15 @@
 ﻿using navtest.Models;
-using navtest.Views;
 using Plugin.BLE;
 using Plugin.BLE.Abstractions.Contracts;
-using Plugin.BLE.Abstractions.EventArgs;
+using SkiaSharp;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
-using System.Numerics;
-using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
-using Xamarin.Forms.Internals;
+using Color = Xamarin.Forms.Color;
 
 namespace navtest.ViewModels
 {
@@ -152,73 +149,99 @@ namespace navtest.ViewModels
             Task<Stream> GetImageStreamAsync();
         }
 
-        async void sendPicture()
+        async void selectPicture()
         {
             Stream stream = await DependencyService.Get<IPhotoPickerService>().GetImageStreamAsync();
             if (stream != null)
             {
-                ImageSource pictureRaw = ImageSource.FromStream(() => stream);
-                //Bitmap fromStream = new Bitmap(stream);
+                SKBitmap picture = SKBitmap.Decode(stream);
+                //ScalePixels(SkiaSharp.SKPixmap destination, SkiaSharp.SKFilterQuality quality);
+                sendPicture( picture );
             }
         }
 
-        private async void sendPicture2()
+        private async void sendPicture(SKBitmap picture )
         {
-            //try
-            //{
-            //    UUID_WS2812B_PICTURE_CHAR = await UUID_WS2812B_SERVICE.GetCharacteristicAsync(Guid.Parse(UUID_WS2812B_PICTURE_CHAR_UID));
-            //
-            //    var data = new byte[MAX_BLE_SIZE];
-            //    int pixelcount = int.Parse(_lblCol) * int.Parse(_lblRow);
-            //    int bytecount = pixelcount * 3; // because 1 pixel = 3*8bit
-            //    int packetcount = bytecount / MAX_PICTURE_PAYLOAD + 1;
-            //    int offset;
-            //    int size;
-            //
-            //    for (int packetnr = 0; packetnr < packetcount; packetnr++)
-            //    {
-            //        // set header
-            //        offset = packetnr * MAX_PICTURE_PAYLOAD;
-            //        byte[] offsetB = BitConverter.GetBytes(offset);
-            //        data[1] = offsetB[0];
-            //        data[2] = offsetB[1];
-            //
-            //        if (packetnr == packetcount - 1)
-            //        {
-            //            // last packet
-            //            size = bytecount % MAX_PICTURE_PAYLOAD;
-            //            byte[] sizeB = BitConverter.GetBytes(size);
-            //            data[3] = sizeB[0];
-            //            data[4] = sizeB[1];
-            //            data[0] = CMD_BIT_REFRESH;
-            //        }
-            //        else
-            //        {
-            //            size = MAX_PICTURE_PAYLOAD;
-            //            byte[] sizeB = BitConverter.GetBytes(size);
-            //            data[3] = sizeB[0];
-            //            data[4] = sizeB[1];
-            //            data[0] = CMD_EMPTY;
-            //        }
-            //
-            //        // set picture data (3*8bits=1pixel)
-            //        for (int pixelbyte = 0; pixelbyte < size; pixelbyte++)
-            //        {
-            //            data[PICTURE_HEADER_OFFSET + pixelbyte] = 0x00;
-            //        }
-            //
-            //        // send the packet
-            //        await UUID_WS2812B_PICTURE_CHAR.WriteAsync(data);
-            //        Debug.WriteLine("Packet: " + (packetnr + 1) + "/" + packetcount + " sended, with " + (size + 4) + " bytes");
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    Debug.WriteLine(ex.Message, "Error while sending picture");
-            //    await App.Current.MainPage.DisplayAlert("Error", "Error while sending picture", "OK");
-            //}
-            //
-            //clearFrameApp();
+            int col                 = int.Parse(_lblCol);
+            int row                 = int.Parse(_lblRow);
+            int pixelcount          = col * row;
+            int bytecount           = pixelcount * 3; // because 1 pixel = 3*8bit
+            int packetcount         = bytecount / MAX_PICTURE_PAYLOAD + 1;
+            byte[] data             = new byte[MAX_BLE_SIZE];
+            byte[] pictureParsed    = new byte[bytecount];
+            int offset;
+            int size;
+            SKColor pixelSKColor;
+            int counter;
+            int xDelta = 0;
+            int yDelta = 0;
+
+            // parse picture into the frames resolution
+            xDelta = picture.Width / col;
+            yDelta = picture.Height / row;
+            counter = 0;
+            for ( int y=yDelta/2; y<picture.Height; y+=yDelta )
+            {
+                for ( int x=xDelta/2; x<picture.Width; x+=xDelta )
+                {
+                    pixelSKColor = picture.GetPixel(x, y);
+                    _pixel[counter].Property.BackgroundColor = Color.FromRgb(pixelSKColor.Red, pixelSKColor.Green, pixelSKColor.Blue);
+                    pictureParsed[counter * 3] = pixelSKColor.Red;
+                    pictureParsed[counter * 3 + 1] = pixelSKColor.Green;
+                    pictureParsed[counter * 3 + 2] = pixelSKColor.Blue;
+                    pictureParsed[counter * 3] /= 8;
+                    pictureParsed[counter * 3 + 1] /= 8;
+                    pictureParsed[counter * 3 + 2] /= 8;
+                    counter++;
+                }
+            }
+
+            try
+            {
+                UUID_WS2812B_PICTURE_CHAR = await UUID_WS2812B_SERVICE.GetCharacteristicAsync(Guid.Parse(UUID_WS2812B_PICTURE_CHAR_UID));
+                counter = 0;
+                for (int packetnr = 0; packetnr < packetcount; packetnr++)
+                {
+                    // set header
+                    offset = packetnr * MAX_PICTURE_PAYLOAD;
+                    byte[] offsetB = BitConverter.GetBytes(offset);
+                    data[1] = offsetB[0];
+                    data[2] = offsetB[1];
+            
+                    if (packetnr == packetcount - 1)
+                    {
+                        // last packet
+                        size = bytecount % MAX_PICTURE_PAYLOAD;
+                        byte[] sizeB = BitConverter.GetBytes(size);
+                        data[3] = sizeB[0];
+                        data[4] = sizeB[1];
+                        data[0] = CMD_BIT_REFRESH;
+                    }
+                    else
+                    {
+                        size = MAX_PICTURE_PAYLOAD;
+                        byte[] sizeB = BitConverter.GetBytes(size);
+                        data[3] = sizeB[0];
+                        data[4] = sizeB[1];
+                        data[0] = CMD_EMPTY;
+                    }
+            
+                    // set picture data (3*8bits=1pixel)
+                    for (int pixelbyte = 0; pixelbyte < size; pixelbyte++)
+                    {
+                        data[PICTURE_HEADER_OFFSET + pixelbyte] = pictureParsed[counter++];
+                    }
+            
+                    // send the packet
+                    await UUID_WS2812B_PICTURE_CHAR.WriteAsync(data);
+                    Debug.WriteLine("Packet: " + (packetnr + 1) + "/" + packetcount + " sended, with " + (size + 4) + " bytes");
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message, "Error while sending picture");
+                await App.Current.MainPage.DisplayAlert("Error", "Error while sending picture", "OK");
+            }
         }
 
         private async void clearFrame()
@@ -264,12 +287,11 @@ namespace navtest.ViewModels
 
         private void clearFrameApp()
         {
-            // for Version
+            // clears pixel locally on the app
             for (int i = 0; i < _pixel.Count; i++)
             {
                 _pixel[i].Property.BackgroundColor = Color.FromRgb(0, 0, 0);
             }
-            //RaisePropertyChanged("_pixel");
         }
 
         private void setFrameApp(byte[] data, int size)
@@ -285,7 +307,6 @@ namespace navtest.ViewModels
             {
                 _pixel[i].Property.BackgroundColor = Color.FromRgb(data[3 * i], data[3 * i + 1], data[3 * i + 2]);
             }
-            //RaisePropertyChanged("_pixel");
         }
 
         public DeviceViewModel(INavigation navigation)
@@ -298,7 +319,7 @@ namespace navtest.ViewModels
 
             _pixel = new ObservableCollection<Pixel>();
 
-            PictureCommand = new Command(() => sendPicture());
+            PictureCommand = new Command(() => selectPicture());
             PixelCommand = new Command(() => sendPixelRandom());
             EraseCommand = new Command(() => clearFrame());
 

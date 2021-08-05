@@ -54,6 +54,10 @@
               "target": "Package",
               "version": "[2.1.2, )"
             },
+            "System.Drawing.Common": {
+              "target": "Package",
+              "version": "[5.0.2, )"
+            },
             "Xamarin.Essentials": {
               "target": "Package",
               "version": "[1.6.1, )"
@@ -127,6 +131,10 @@
             "Plugin.BLE": {
               "target": "Package",
               "version": "[2.1.2, )"
+            },
+            "System.Drawing.Common": {
+              "target": "Package",
+              "version": "[5.0.2, )"
             },
             "Xamarin.Essentials": {
               "target": "Package",

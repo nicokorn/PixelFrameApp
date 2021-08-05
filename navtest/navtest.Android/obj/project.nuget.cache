@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "Wc7GGy1tL5Bt/GOKp6ZfBzJayRCUDzJW1JRQuBX1zWqnq70YIpFHt2F2zbASnCTU7oSToLpLdrr8cM5TtQOv6Q==",
+  "dgSpecHash": "csZ9P7D4UF7lR8oAZoINmVmjxZnJsaoRkKLBogNx0BVqZVrZCgBMzfvx+KeYRM5ZwSdBY5pxxVxsQUjdEbiG5g==",
   "success": true,
   "projectFilePath": "C:\\Users\\nico1\\OneDrive\\Documents\\GitHub\\XAMARIN_WS2812B\\navtest\\navtest.Android\\navtest.Android.csproj",
   "expectedPackageFiles": [
@@ -13,6 +13,7 @@
     "C:\\Users\\nico1\\.nuget\\packages\\skiasharp\\1.68.3\\skiasharp.1.68.3.nupkg.sha512",
     "C:\\Users\\nico1\\.nuget\\packages\\skiasharp.views\\1.68.3\\skiasharp.views.1.68.3.nupkg.sha512",
     "C:\\Users\\nico1\\.nuget\\packages\\skiasharp.views.forms\\1.68.3\\skiasharp.views.forms.1.68.3.nupkg.sha512",
+    "C:\\Users\\nico1\\.nuget\\packages\\system.drawing.common\\5.0.2\\system.drawing.common.5.0.2.nupkg.sha512",
     "C:\\Users\\nico1\\.nuget\\packages\\system.numerics.vectors\\4.5.0\\system.numerics.vectors.4.5.0.nupkg.sha512",
     "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\xamarin.androidx.activity\\1.1.0.5\\xamarin.androidx.activity.1.1.0.5.nupkg.sha512",
     "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\xamarin.androidx.annotation\\1.1.0.8\\xamarin.androidx.annotation.1.1.0.8.nupkg.sha512",
