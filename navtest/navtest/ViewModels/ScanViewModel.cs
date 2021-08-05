@@ -142,11 +142,13 @@ namespace navtest.ViewModels
 
         private void OnDeviceDisconnected(object sender, DeviceEventArgs args)
         {
+            goBackNavigation();
             Debug.WriteLine("Disconnected from device!");
         }
 
         private void OnDeviceConnectionLost(object sender, DeviceEventArgs args)
         {
+            goBackNavigation();
             Debug.WriteLine("Connection lost to device!");
         }
 
@@ -190,12 +192,12 @@ namespace navtest.ViewModels
 
         private async void HandleSelectedDevice(NativeDevice device)
         {
-            await App.Current.MainPage.DisplayAlert("Connectig", "Connecting to device.", "OK");
+            await App.Current.MainPage.DisplayAlert("Connecting", "Connecting to device.", "OK");
             if ( await ConnectDeviceAsync(device) )
            {
                 Debug.WriteLine("Connected!");
                 BaseViewModel.connectedDevice=device;
-                await this.navigation.PushAsync(new DeviceView(), true);
+                await this.navigation.PushAsync(new DeviceView());
             }
         }
 
@@ -238,6 +240,16 @@ namespace navtest.ViewModels
                 Debug.WriteLine("Disconnecting!");
                 await adapter.DisconnectDeviceAsync(connectedDevice.Device);
             }
+        }
+
+        private void goBackNavigation()
+        {
+            Device.BeginInvokeOnMainThread(async () => await navigation.PopAsync());
+        }
+
+        private async void ConnectionLostDialog()
+        {
+            await App.Current.MainPage.DisplayAlert("Error", "Connecting to the device lost.", "OK");
         }
     }
 }

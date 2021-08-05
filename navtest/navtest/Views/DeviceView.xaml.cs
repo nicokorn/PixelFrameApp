@@ -16,7 +16,7 @@ namespace navtest.Views
         public DeviceView()
         {
             InitializeComponent();
-            this.BindingContext = new DeviceViewModel(this.Navigation);
+            this.BindingContext = new DeviceViewModel(this.Navigation); 
         }
     }
 }

@@ -1,10 +1,66 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:vm="clr-namespace:navtest.ViewModels"
-			 Title="Scan for devices"
              x:Class="navtest.Views.ScanView"
              xmlns:b="clr-namespace:Corcav.Behaviors;assembly=Corcav.Behaviors">
-    
+
+    <NavigationPage.TitleView>
+        <StackLayout 
+            Orientation="Horizontal"
+            >
+
+            <Grid>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="2.9*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Frame
+                    Grid.Column="0"
+                    CornerRadius="10"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    HeightRequest="30"
+                    Padding="0"
+                    Opacity="0.6"
+                    >
+                    <Image 
+                        Source="icon.png" 
+                        Scale="1"
+                    />
+                </Frame>
+
+                <Label 
+                    Grid.Column="1"
+                    Text="FrameController" 
+                    FontAttributes="Bold"
+                    FontSize="30"
+                    HorizontalTextAlignment="Center"
+                    VerticalTextAlignment="Center"
+                />
+                
+                <Frame
+                    Grid.Column="2"
+                    CornerRadius="10"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    HeightRequest="30"
+                    Padding="0"
+                    Opacity="0.6"
+                    >
+                    <Image 
+                        Source="icon.png" 
+                        Scale="1"
+                    />
+                </Frame>
+
+            </Grid>
+
+        </StackLayout>
+    </NavigationPage.TitleView>
+
     <b:Interaction.Behaviors>
         <b:BehaviorCollection>
             <b:EventToCommand EventName="Appearing" Command="{Binding AppearingCommand}" />

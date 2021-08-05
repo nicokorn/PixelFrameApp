@@ -6,14 +6,16 @@
              xmlns:colorpicker="clr-namespace:ColorPicker;assembly=ColorPicker"
              xmlns:forms="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
              mc:Ignorable="d"
-             Title="Frame controller"
+             Title="Back"
              x:Class="navtest.Views.DeviceView">
+
     <ContentPage.Content>
         <StackLayout>
 
             <Label 
                 Text="Frame preview"
                 FontAttributes="Bold"
+                FontSize="20"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
 

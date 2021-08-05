@@ -302,13 +302,6 @@ namespace navtest.ViewModels
                     _pixel.Add(pixel);
                 }
             }
-
-            // register callbacks
-            //ble.StateChanged += OnStateChanged;
-            //adapter.DeviceDiscovered += OnDeviceDiscovered;
-            //adapter.ScanTimeoutElapsed += Adapter_ScanTimeoutElapsed;
-            adapter.DeviceDisconnected += OnDeviceDisconnected;
-            adapter.DeviceConnectionLost += OnDeviceConnectionLost;
         }
 
         private async void LoadServicesWS2812B()
@@ -377,22 +370,6 @@ namespace navtest.ViewModels
                 Debug.WriteLine(ex.Message, "Error while reading characteristics");
                 await App.Current.MainPage.DisplayAlert("Error", "Error while reading characteristics", "OK");
             }
-        }
-
-        private void OnDeviceDisconnected(object sender, DeviceEventArgs args)
-        {
-            goBackNavigation();
-            Debug.WriteLine("Disconnected from device!");
-        }
-
-        private void OnDeviceConnectionLost(object sender, DeviceEventArgs args)
-        {
-            goBackNavigation();
-            Debug.WriteLine("Connection lost to device!");
-        }
-        private async void goBackNavigation()
-        {
-            await this.navigation.PopAsync();
         }
     }
 }
