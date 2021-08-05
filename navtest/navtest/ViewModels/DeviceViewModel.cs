@@ -7,9 +7,12 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.IO;
 using System.Numerics;
 using System.Text;
+using System.Threading.Tasks;
 using Xamarin.Forms;
+using Xamarin.Forms.Internals;
 
 namespace navtest.ViewModels
 {
@@ -102,6 +105,7 @@ namespace navtest.ViewModels
 
         public Command PixelCommand { get; set; }
         public Command EraseCommand { get; set; }
+        public Command PictureCommand { get; set; }
 
         private async void sendPixelRandom()
         {
@@ -143,65 +147,78 @@ namespace navtest.ViewModels
             }
         }
 
-        private async void sendPicture()
+        public interface IPhotoPickerService
         {
-            Debug.WriteLine("Erase all pixel");
+            Task<Stream> GetImageStreamAsync();
+        }
 
-            try
+        async void sendPicture()
+        {
+            Stream stream = await DependencyService.Get<IPhotoPickerService>().GetImageStreamAsync();
+            if (stream != null)
             {
-                UUID_WS2812B_PICTURE_CHAR = await UUID_WS2812B_SERVICE.GetCharacteristicAsync(Guid.Parse(UUID_WS2812B_PICTURE_CHAR_UID));
-
-                var data = new byte[MAX_BLE_SIZE];
-                int pixelcount = int.Parse(_lblCol) * int.Parse(_lblRow);
-                int bytecount = pixelcount * 3; // because 1 pixel = 3*8bit
-                int packetcount = bytecount / MAX_PICTURE_PAYLOAD + 1;
-                int offset;
-                int size;
-
-                for (int packetnr = 0; packetnr < packetcount; packetnr++)
-                {
-                    // set header
-                    offset = packetnr * MAX_PICTURE_PAYLOAD;
-                    byte[] offsetB = BitConverter.GetBytes(offset);
-                    data[1] = offsetB[0];
-                    data[2] = offsetB[1];
-
-                    if (packetnr == packetcount - 1)
-                    {
-                        // last packet
-                        size = bytecount % MAX_PICTURE_PAYLOAD;
-                        byte[] sizeB = BitConverter.GetBytes(size);
-                        data[3] = sizeB[0];
-                        data[4] = sizeB[1];
-                        data[0] = CMD_BIT_REFRESH;
-                    }
-                    else
-                    {
-                        size = MAX_PICTURE_PAYLOAD;
-                        byte[] sizeB = BitConverter.GetBytes(size);
-                        data[3] = sizeB[0];
-                        data[4] = sizeB[1];
-                        data[0] = 0;
-                    }
-
-                    // set picture data (3*8bits=1pixel)
-                    for (int pixelbyte = 0; pixelbyte < size; pixelbyte++)
-                    {
-                        data[PICTURE_HEADER_OFFSET + pixelbyte] = 0x00;
-                    }
-
-                    // send the packet
-                    await UUID_WS2812B_PICTURE_CHAR.WriteAsync(data);
-                    Debug.WriteLine("Packet: " + (packetnr + 1) + "/" + packetcount + " sended, with " + (size + 4) + " bytes");
-                }
+                ImageSource pictureRaw = ImageSource.FromStream(() => stream);
+                //Bitmap fromStream = new Bitmap(stream);
             }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.Message, "Error while sending picture");
-                await App.Current.MainPage.DisplayAlert("Error", "Error while sending picture", "OK");
-            }
+        }
 
-            clearFrameApp();
+        private async void sendPicture2()
+        {
+            //try
+            //{
+            //    UUID_WS2812B_PICTURE_CHAR = await UUID_WS2812B_SERVICE.GetCharacteristicAsync(Guid.Parse(UUID_WS2812B_PICTURE_CHAR_UID));
+            //
+            //    var data = new byte[MAX_BLE_SIZE];
+            //    int pixelcount = int.Parse(_lblCol) * int.Parse(_lblRow);
+            //    int bytecount = pixelcount * 3; // because 1 pixel = 3*8bit
+            //    int packetcount = bytecount / MAX_PICTURE_PAYLOAD + 1;
+            //    int offset;
+            //    int size;
+            //
+            //    for (int packetnr = 0; packetnr < packetcount; packetnr++)
+            //    {
+            //        // set header
+            //        offset = packetnr * MAX_PICTURE_PAYLOAD;
+            //        byte[] offsetB = BitConverter.GetBytes(offset);
+            //        data[1] = offsetB[0];
+            //        data[2] = offsetB[1];
+            //
+            //        if (packetnr == packetcount - 1)
+            //        {
+            //            // last packet
+            //            size = bytecount % MAX_PICTURE_PAYLOAD;
+            //            byte[] sizeB = BitConverter.GetBytes(size);
+            //            data[3] = sizeB[0];
+            //            data[4] = sizeB[1];
+            //            data[0] = CMD_BIT_REFRESH;
+            //        }
+            //        else
+            //        {
+            //            size = MAX_PICTURE_PAYLOAD;
+            //            byte[] sizeB = BitConverter.GetBytes(size);
+            //            data[3] = sizeB[0];
+            //            data[4] = sizeB[1];
+            //            data[0] = CMD_EMPTY;
+            //        }
+            //
+            //        // set picture data (3*8bits=1pixel)
+            //        for (int pixelbyte = 0; pixelbyte < size; pixelbyte++)
+            //        {
+            //            data[PICTURE_HEADER_OFFSET + pixelbyte] = 0x00;
+            //        }
+            //
+            //        // send the packet
+            //        await UUID_WS2812B_PICTURE_CHAR.WriteAsync(data);
+            //        Debug.WriteLine("Packet: " + (packetnr + 1) + "/" + packetcount + " sended, with " + (size + 4) + " bytes");
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    Debug.WriteLine(ex.Message, "Error while sending picture");
+            //    await App.Current.MainPage.DisplayAlert("Error", "Error while sending picture", "OK");
+            //}
+            //
+            //clearFrameApp();
         }
 
         private async void clearFrame()
@@ -281,6 +298,7 @@ namespace navtest.ViewModels
 
             _pixel = new ObservableCollection<Pixel>();
 
+            PictureCommand = new Command(() => sendPicture());
             PixelCommand = new Command(() => sendPixelRandom());
             EraseCommand = new Command(() => clearFrame());
 

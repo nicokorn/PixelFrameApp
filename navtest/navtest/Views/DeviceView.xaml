@@ -51,7 +51,7 @@
 
             <Button 
                 Text="Send picture" 
-                Command="{Binding EraseCommand}" 
+                Command="{Binding PictureCommand}" 
                 IsEnabled="True" />
 
             <Button 
