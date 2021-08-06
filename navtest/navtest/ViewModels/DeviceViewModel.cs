@@ -127,7 +127,7 @@ namespace navtest.ViewModels
         private async void sendPixel(Pixel pixel, int col, int row, int r, int g, int b)
         {
             Debug.WriteLine("Send pixel");
-            byte[] data = { (byte)CMD_BIT_REFRESH, (byte)row, 0x00, (byte)col, 0x00, (byte)r, (byte)g, (byte)b };
+            byte[] data = { (byte)CMD_BIT_REFRESH, (byte)row, 0x00, (byte)col, 0x00, (byte)(r/DIM), (byte)(g/DIM), (byte)(b/DIM) };
             Color tempColor = pixel.Property.BackgroundColor;
 
             try
@@ -193,9 +193,9 @@ namespace navtest.ViewModels
                     pictureParsed[counter * 3] = pixelSKColor.Red;
                     pictureParsed[counter * 3 + 1] = pixelSKColor.Green;
                     pictureParsed[counter * 3 + 2] = pixelSKColor.Blue;
-                    pictureParsed[counter * 3] /= 8;
-                    pictureParsed[counter * 3 + 1] /= 8;
-                    pictureParsed[counter * 3 + 2] /= 8;
+                    pictureParsed[counter * 3] /= DIM;
+                    pictureParsed[counter * 3 + 1] /= DIM;
+                    pictureParsed[counter * 3 + 2] /= DIM;
                     counter++;
                 }
             }
@@ -367,6 +367,8 @@ namespace navtest.ViewModels
                 UUID_WS2812B_ROW_CHAR = await UUID_WS2812B_SERVICE.GetCharacteristicAsync(Guid.Parse(UUID_WS2812B_ROW_CHAR_UID));
                 UUID_WS2812B_PIXEL_CHAR = await UUID_WS2812B_SERVICE.GetCharacteristicAsync(Guid.Parse(UUID_WS2812B_PIXEL_CHAR_UID));
                 UUID_WS2812B_PICTURE_CHAR = await UUID_WS2812B_SERVICE.GetCharacteristicAsync(Guid.Parse(UUID_WS2812B_PICTURE_CHAR_UID));
+                UUID_WS2812B_PAGE1_CHAR = await UUID_WS2812B_SERVICE.GetCharacteristicAsync(Guid.Parse(UUID_WS2812B_PAGE1_CHAR_UID));
+                UUID_WS2812B_PAGE2_CHAR = await UUID_WS2812B_SERVICE.GetCharacteristicAsync(Guid.Parse(UUID_WS2812B_PAGE2_CHAR_UID));
             }
             catch (Exception ex)
             {
@@ -376,7 +378,7 @@ namespace navtest.ViewModels
 
             try
             {
-                // set cols on the uid state notification
+                // read col number from the colunm characteristic
                 var bytesCOL = await UUID_WS2812B_COL_CHAR.ReadAsync();
                 if (Buffer.ByteLength(bytesCOL) > 0)
                 {
@@ -392,7 +394,7 @@ namespace navtest.ViewModels
                     //await UUID_WS2812B_COL_CHAR.StartUpdatesAsync();
                 }
 
-                // set cols on the uid state notification
+                // read row number from the row characteristic
                 var bytesROW = await UUID_WS2812B_ROW_CHAR.ReadAsync();
                 if (Buffer.ByteLength(bytesCOL) > 0)
                 {
@@ -406,6 +408,20 @@ namespace navtest.ViewModels
                     //    RaisePropertyChanged("LblRow");
                     //};
                     //await UUID_WS2812B_ROW_CHAR.StartUpdatesAsync();
+                }
+
+                // read page1 & 2 from the page1 & 2 characteristic for the frame preview
+                byte[] bytesP1 = await UUID_WS2812B_PAGE1_CHAR.ReadAsync();
+                byte[] bytesP2 = await UUID_WS2812B_PAGE2_CHAR.ReadAsync();
+                byte[] bytesP = new byte[bytesP1.Length+ bytesP2.Length];
+                Buffer.BlockCopy(bytesP1, 0, bytesP, 0, bytesP1.Length);
+                Buffer.BlockCopy(bytesP2, 0, bytesP, bytesP1.Length, bytesP2.Length);
+                if( bytesP.Length <= _pixel.Count*3 )
+                {
+                    for (int i = 0; i < _pixel.Count; i++)
+                    {
+                        _pixel[i].Property.BackgroundColor = Color.FromRgb(bytesP[3*i]*DIM, bytesP[3*i+1]*DIM, bytesP[3*i+2]*DIM);
+                    }
                 }
             }
             catch (Exception ex)
