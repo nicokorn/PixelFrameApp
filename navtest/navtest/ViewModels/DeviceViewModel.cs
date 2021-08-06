@@ -384,12 +384,12 @@ namespace navtest.ViewModels
                     _lblCol = num.ToString();
                     RaisePropertyChanged("LblCol");
 
-                    UUID_WS2812B_COL_CHAR.ValueUpdated += (o, args) =>
-                    {
-                        _lblCol = BitConverter.ToInt16(args.Characteristic.Value, 0).ToString();
-                        RaisePropertyChanged("LblCol");
-                    };
-                    await UUID_WS2812B_COL_CHAR.StartUpdatesAsync();
+                    //UUID_WS2812B_COL_CHAR.ValueUpdated += (o, args) =>
+                    //{
+                    //    _lblCol = BitConverter.ToInt16(args.Characteristic.Value, 0).ToString();
+                    //    RaisePropertyChanged("LblCol");
+                    //};
+                    //await UUID_WS2812B_COL_CHAR.StartUpdatesAsync();
                 }
 
                 // set cols on the uid state notification
@@ -400,12 +400,12 @@ namespace navtest.ViewModels
                     _lblRow = num.ToString();
                     RaisePropertyChanged("LblRow");
 
-                    UUID_WS2812B_ROW_CHAR.ValueUpdated += (o, args) =>
-                    {
-                        _lblRow = BitConverter.ToInt16(args.Characteristic.Value, 0).ToString();
-                        RaisePropertyChanged("LblRow");
-                    };
-                    await UUID_WS2812B_ROW_CHAR.StartUpdatesAsync();
+                    //UUID_WS2812B_ROW_CHAR.ValueUpdated += (o, args) =>
+                    //{
+                    //    _lblRow = BitConverter.ToInt16(args.Characteristic.Value, 0).ToString();
+                    //    RaisePropertyChanged("LblRow");
+                    //};
+                    //await UUID_WS2812B_ROW_CHAR.StartUpdatesAsync();
                 }
             }
             catch (Exception ex)
