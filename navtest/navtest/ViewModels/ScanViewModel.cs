@@ -131,6 +131,14 @@ namespace navtest.ViewModels
 
         private void Adapter_ScanTimeoutElapsed(object sender, EventArgs e)
         {
+            //if (Application.Current.Properties.ContainsKey("storedDevice"))
+            //{
+            //    var storedDevice = Application.Current.Properties["storedDevice"] as NativeDevice;
+            //
+            //    // do something with id
+            //    _items.Add(new NativeDevice(storedDevice.Device));
+            //}
+
             Debug.WriteLine("Timeout!");
             Debug.WriteLine("Item count: " + _items.Count);
             _scanEnabled = true;
@@ -212,6 +220,8 @@ namespace navtest.ViewModels
             {
                 await adapter.ConnectToDeviceAsync(device.Device, new ConnectParameters(autoConnect: true, forceBleTransport: true));
                 connectedDevice = device;
+                //Application.Current.Properties["storedDevice"] = device;
+                //await Application.Current.SavePropertiesAsync();
                 Debug.WriteLine($"Connected to {device.Device.Name}.");
                 return true;
 
@@ -226,11 +236,12 @@ namespace navtest.ViewModels
         private void OnAppearing()
         {
             DisconnectDeviceCurrent();
-            //OnStartScan();
+            OnStartScan();
         }
 
         private void OnDisappearing()
         {
+            adapter.StopScanningForDevicesAsync();
         }
 
         private async void DisconnectDevice(NativeDevice device)
