@@ -1,0 +1,33 @@
+{
+  "version": 2,
+  "dgSpecHash": "Vo0lkHIG8an1RykvZYcKmhOPg6SX2GkKLDYa702iJZv+ZAgAHbzTImWf1NNIY0vaZ8cME2e8g00x1zywRerehw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\nico1\\OneDrive\\Documents\\GitHub\\XAMARIN_WS2812B\\framecontroller\\framecontroller\\framecontroller.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\nico1\\.nuget\\packages\\acr.userdialogs\\7.1.0.514\\acr.userdialogs.7.1.0.514.nupkg.sha512",
+    "C:\\Users\\nico1\\.nuget\\packages\\colormineportable\\2.0.1\\colormineportable.2.0.1.nupkg.sha512",
+    "C:\\Users\\nico1\\.nuget\\packages\\colorpicker.xamarin.forms\\1.3.4.11\\colorpicker.xamarin.forms.1.3.4.11.nupkg.sha512",
+    "C:\\Users\\nico1\\.nuget\\packages\\corcav.behaviors\\2.3.7\\corcav.behaviors.2.3.7.nupkg.sha512",
+    "C:\\Users\\nico1\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\nico1\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512",
+    "C:\\Users\\nico1\\.nuget\\packages\\plugin.ble\\2.1.2\\plugin.ble.2.1.2.nupkg.sha512",
+    "C:\\Users\\nico1\\.nuget\\packages\\skiasharp\\1.60.3\\skiasharp.1.60.3.nupkg.sha512",
+    "C:\\Users\\nico1\\.nuget\\packages\\skiasharp.views.forms\\1.60.3\\skiasharp.views.forms.1.60.3.nupkg.sha512",
+    "C:\\Users\\nico1\\.nuget\\packages\\system.drawing.common\\5.0.2\\system.drawing.common.5.0.2.nupkg.sha512",
+    "C:\\Users\\nico1\\.nuget\\packages\\system.numerics.vectors\\4.5.0\\system.numerics.vectors.4.5.0.nupkg.sha512",
+    "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\xamarin.essentials\\1.6.1\\xamarin.essentials.1.6.1.nupkg.sha512",
+    "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\xamarin.forms\\5.0.0.2012\\xamarin.forms.5.0.0.2012.nupkg.sha512"
+  ],
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Das Paket \"Corcav.Behaviors 2.3.7\" wurde nicht mit dem Projektzielframework \".NETStandard,Version=v2.0\", sondern mit \".NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8\" wiederhergestellt. Dieses Paket ist mit Ihrem Projekt möglicherweise nicht vollständig kompatibel.",
+      "libraryId": "Corcav.Behaviors",
+      "targetGraphs": [
+        ".NETStandard,Version=v2.0"
+      ]
+    }
+  ]
+}

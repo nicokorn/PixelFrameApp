@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:colorpicker="clr-namespace:ColorPicker;assembly=ColorPicker"
+             xmlns:forms="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
+             mc:Ignorable="d"
+             Title="Back"
+             x:Class="framecontroller.Views.DeviceView">
+
+    <ContentPage.Content>
+        <StackLayout>
+
+            <Label 
+                Text="Frame preview"
+                FontAttributes="Bold"
+                FontSize="20"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+
+            <CollectionView
+                ItemsSource="{Binding Pixel}" 
+                SelectionMode="Single"
+                SelectedItem="{Binding SelectedPixel, Mode=TwoWay}"
+                ItemsLayout="VerticalGrid,15" 
+                Scale="0.95"
+                VerticalScrollBarVisibility="Never"
+                HorizontalScrollBarVisibility="Never"
+                HeightRequest="480"
+                >
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="0.5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="29" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Label BackgroundColor="{Binding Property.BackgroundColor}" />
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <colorpicker:RGBSliders 
+                x:Name="HSLSliders1"
+                SelectedColor="{Binding SelectedColor, Mode=TwoWay}"
+                ShowAlphaSlider="False" />
+
+            <Button 
+                Text="Send picture" 
+                Command="{Binding PictureCommand}" 
+                IsEnabled="True" />
+
+            <Button 
+                Text="Clear the frame" 
+                Command="{Binding EraseCommand}" 
+                IsEnabled="True" />
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
