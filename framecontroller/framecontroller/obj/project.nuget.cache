@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "Vo0lkHIG8an1RykvZYcKmhOPg6SX2GkKLDYa702iJZv+ZAgAHbzTImWf1NNIY0vaZ8cME2e8g00x1zywRerehw==",
+  "dgSpecHash": "8gCTMRTRWH8F4y2tEVZVAsG14mypc/KlNE6rm/7ejBr4GX1gav5laCVh09eDMGv3me2o41qT0ugs2vAla9riiw==",
   "success": true,
   "projectFilePath": "C:\\Users\\nico1\\OneDrive\\Documents\\GitHub\\XAMARIN_WS2812B\\framecontroller\\framecontroller\\framecontroller.csproj",
   "expectedPackageFiles": [
@@ -10,6 +10,7 @@
     "C:\\Users\\nico1\\.nuget\\packages\\corcav.behaviors\\2.3.7\\corcav.behaviors.2.3.7.nupkg.sha512",
     "C:\\Users\\nico1\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
     "C:\\Users\\nico1\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512",
+    "C:\\Users\\nico1\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
     "C:\\Users\\nico1\\.nuget\\packages\\plugin.ble\\2.1.2\\plugin.ble.2.1.2.nupkg.sha512",
     "C:\\Users\\nico1\\.nuget\\packages\\skiasharp\\1.60.3\\skiasharp.1.60.3.nupkg.sha512",
     "C:\\Users\\nico1\\.nuget\\packages\\skiasharp.views.forms\\1.60.3\\skiasharp.views.forms.1.60.3.nupkg.sha512",

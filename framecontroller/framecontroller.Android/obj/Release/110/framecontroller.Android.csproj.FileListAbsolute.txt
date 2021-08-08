@@ -493,3 +493,8 @@ C:\Users\nico1\OneDrive\Documents\GitHub\XAMARIN_WS2812B\framecontroller\frameco
 C:\Users\nico1\OneDrive\Documents\GitHub\XAMARIN_WS2812B\framecontroller\framecontroller.Android\obj\Release\110\stamp\_GenerateJavaStubs.stamp
 C:\Users\nico1\OneDrive\Documents\GitHub\XAMARIN_WS2812B\framecontroller\framecontroller.Android\obj\Release\110\stamp\_GeneratePackageManagerJava.stamp
 C:\Users\nico1\OneDrive\Documents\GitHub\XAMARIN_WS2812B\framecontroller\framecontroller.Android\obj\Release\110\stamp\_ResolveLibraryProjectImports.stamp
+C:\Users\nico1\OneDrive\Documents\GitHub\XAMARIN_WS2812B\framecontroller\framecontroller.Android\obj\Release\110\android\assets\Newtonsoft.Json.dll
+C:\Users\nico1\OneDrive\Documents\GitHub\XAMARIN_WS2812B\framecontroller\framecontroller.Android\obj\Release\110\android\assets\System.Data.dll
+C:\Users\nico1\OneDrive\Documents\GitHub\XAMARIN_WS2812B\framecontroller\framecontroller.Android\obj\Release\110\android\assets\System.Data.pdb
+C:\Users\nico1\OneDrive\Documents\GitHub\XAMARIN_WS2812B\framecontroller\framecontroller.Android\obj\Release\110\android\assets\System.Xml.Linq.dll
+C:\Users\nico1\OneDrive\Documents\GitHub\XAMARIN_WS2812B\framecontroller\framecontroller.Android\obj\Release\110\android\assets\System.Xml.Linq.pdb

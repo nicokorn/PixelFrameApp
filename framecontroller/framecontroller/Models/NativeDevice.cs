@@ -1,4 +1,5 @@
-﻿using Plugin.BLE.Abstractions.Contracts;
+﻿using Newtonsoft.Json;
+using Plugin.BLE.Abstractions.Contracts;
 
 namespace framecontroller.Models
 {
@@ -14,6 +15,11 @@ namespace framecontroller.Models
         public override string ToString()
         {
             return "Name: " + this.Name + ", Id: " + this.Id + ", RSSI: " + this.Rssi;
+        }
+
+        [JsonConstructor]
+        public NativeDevice()
+        {
         }
 
         public NativeDevice(IDevice device)

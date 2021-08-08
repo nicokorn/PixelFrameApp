@@ -11,6 +11,7 @@ public class MonoPackageManager_Resources {
 		"Corcav.Behaviors.dll",
 		"FormsViewGroup.dll",
 		"framecontroller.dll",
+		"Newtonsoft.Json.dll",
 		"Plugin.BLE.Abstractions.dll",
 		"Plugin.BLE.dll",
 		"SkiaSharp.dll",

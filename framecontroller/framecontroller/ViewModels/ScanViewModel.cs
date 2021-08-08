@@ -18,6 +18,7 @@ using Acr.UserDialogs;
 using System.Threading.Tasks;
 using System.Threading;
 using framecontroller.Views;
+using Newtonsoft.Json;
 
 namespace framecontroller.ViewModels
 {
@@ -131,21 +132,24 @@ namespace framecontroller.ViewModels
 
         private void Adapter_ScanTimeoutElapsed(object sender, EventArgs e)
         {
-            //if (Application.Current.Properties.ContainsKey("storedDevice"))
-            //{
-            //    var storedDevice = Application.Current.Properties["storedDevice"] as NativeDevice;
-            //
-            //    // do something with id
-            //    _items.Add(new NativeDevice(storedDevice.Device));
-            //}
+            if (Application.Current.Properties.ContainsKey("storedDevice"))
+            {
+                string deviceJSon = Application.Current.Properties["storedDevice"] as string;
+                NativeDevice storedDevice = JsonConvert.DeserializeObject<NativeDevice>(deviceJSon, 
+                    new JsonSerializerSettings()
+                    {
+                        //ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                        TypeNameHandling = TypeNameHandling.Auto,
+                        NullValueHandling = NullValueHandling.Ignore
+                    });
+
+                // do something with id
+                _items.Add(new NativeDevice(storedDevice.Device));
+            }
 
             Debug.WriteLine("Timeout!");
             Debug.WriteLine("Item count: " + _items.Count);
-            _scanEnabled = true;
-            _isRefreshing = false;
-            ScanCommand.ChangeCanExecute();
-            RefreshCommand.ChangeCanExecute();
-            RaisePropertyChanged("IsRefreshing");
+            controlsEnabled(true);
         }
 
         private void OnDeviceDisconnected(object sender, DeviceEventArgs args)
@@ -183,7 +187,7 @@ namespace framecontroller.ViewModels
             }
             catch (Exception ex)
             {
-                Debug.WriteLine("Error Scan!");
+                Debug.WriteLine("Error Scan!: "+ex.Message);
             }
         }
 
@@ -191,11 +195,27 @@ namespace framecontroller.ViewModels
         {
             System.Diagnostics.Debug.WriteLine("Scanning!");
             bleScan();
-            _scanEnabled = false;
-            _isRefreshing = false;
-            ScanCommand.ChangeCanExecute();
-            RefreshCommand.ChangeCanExecute();
-            RaisePropertyChanged("IsRefreshing");
+            controlsEnabled(false);
+        }
+
+        private void controlsEnabled( bool enabled )
+        {
+            if( enabled )
+            {
+                _scanEnabled = true;
+                _isRefreshing = false;
+                ScanCommand.ChangeCanExecute();
+                RefreshCommand.ChangeCanExecute();
+                RaisePropertyChanged("IsRefreshing");
+            }
+            else
+            {
+                _scanEnabled = false;
+                _isRefreshing = false;
+                ScanCommand.ChangeCanExecute();
+                RefreshCommand.ChangeCanExecute();
+                RaisePropertyChanged("IsRefreshing");
+            }
         }
 
         private async void HandleSelectedDevice(NativeDevice device)
@@ -203,14 +223,16 @@ namespace framecontroller.ViewModels
             //We have to test if the device is scanning 
             if (ble.Adapter.IsScanning)
             {
-                await adapter.StartScanningForDevicesAsync();
+                await adapter.StopScanningForDevicesAsync();
             }
+            controlsEnabled(false);
             await App.Current.MainPage.DisplayAlert("Connecting", "Connecting to device.", "OK");
             if ( await ConnectDeviceAsync(device) )
-           {
+            {
                 Debug.WriteLine("Connected!");
                 BaseViewModel.connectedDevice=device;
                 await this.navigation.PushAsync(new DeviceView());
+                controlsEnabled(true);
             }
         }
 
@@ -220,15 +242,23 @@ namespace framecontroller.ViewModels
             {
                 await adapter.ConnectToDeviceAsync(device.Device, new ConnectParameters(autoConnect: true, forceBleTransport: true));
                 connectedDevice = device;
-                //Application.Current.Properties["storedDevice"] = device;
-                //await Application.Current.SavePropertiesAsync();
+                var deviceJSon = JsonConvert.SerializeObject(device, typeof(NativeDevice), Formatting.None,
+                        new JsonSerializerSettings()
+                        {
+                            ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                            NullValueHandling = NullValueHandling.Ignore,
+                            Formatting = Formatting.Indented,
+                            TypeNameHandling = TypeNameHandling.Auto
+                        });
+                Application.Current.Properties["storedDevice"] = deviceJSon;
+                await Application.Current.SavePropertiesAsync();
                 Debug.WriteLine($"Connected to {device.Device.Name}.");
                 return true;
 
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex.Message, "Connection error");
+                Debug.WriteLine(ex.Message, "Connection error: "+ ex.Message);
                 return false;
             }
         }

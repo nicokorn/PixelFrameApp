@@ -43,110 +43,110 @@
 	.section	.rodata.map_aname.7,"aMS",@progbits,1
 	.type	.L.map_aname.7, @object
 .L.map_aname.7:
-	.asciz	"framecontroller.Android"
-	.size	.L.map_aname.7, 24
+	.asciz	"Xamarin.AndroidX.ViewPager"
+	.size	.L.map_aname.7, 27
 
 	.section	.rodata.map_aname.8,"aMS",@progbits,1
 	.type	.L.map_aname.8, @object
 .L.map_aname.8:
-	.asciz	"Xamarin.AndroidX.ViewPager"
-	.size	.L.map_aname.8, 27
+	.asciz	"Xamarin.AndroidX.CustomView"
+	.size	.L.map_aname.8, 28
 
 	.section	.rodata.map_aname.9,"aMS",@progbits,1
 	.type	.L.map_aname.9, @object
 .L.map_aname.9:
-	.asciz	"Xamarin.AndroidX.CustomView"
-	.size	.L.map_aname.9, 28
+	.asciz	"Xamarin.AndroidX.AppCompat.AppCompatResources"
+	.size	.L.map_aname.9, 46
 
 	.section	.rodata.map_aname.10,"aMS",@progbits,1
 	.type	.L.map_aname.10, @object
 .L.map_aname.10:
-	.asciz	"Mono.Android"
-	.size	.L.map_aname.10, 13
+	.asciz	"Xamarin.AndroidX.Loader"
+	.size	.L.map_aname.10, 24
 
 	.section	.rodata.map_aname.11,"aMS",@progbits,1
 	.type	.L.map_aname.11, @object
 .L.map_aname.11:
-	.asciz	"Xamarin.AndroidX.AppCompat.AppCompatResources"
-	.size	.L.map_aname.11, 46
+	.asciz	"SkiaSharp.Views.Android"
+	.size	.L.map_aname.11, 24
 
 	.section	.rodata.map_aname.12,"aMS",@progbits,1
 	.type	.L.map_aname.12, @object
 .L.map_aname.12:
-	.asciz	"Xamarin.AndroidX.Loader"
-	.size	.L.map_aname.12, 24
+	.asciz	"Xamarin.AndroidX.SavedState"
+	.size	.L.map_aname.12, 28
 
 	.section	.rodata.map_aname.13,"aMS",@progbits,1
 	.type	.L.map_aname.13, @object
 .L.map_aname.13:
-	.asciz	"SkiaSharp.Views.Android"
-	.size	.L.map_aname.13, 24
+	.asciz	"Xamarin.AndroidX.Lifecycle.Common"
+	.size	.L.map_aname.13, 34
 
 	.section	.rodata.map_aname.14,"aMS",@progbits,1
 	.type	.L.map_aname.14, @object
 .L.map_aname.14:
-	.asciz	"Xamarin.AndroidX.SavedState"
-	.size	.L.map_aname.14, 28
+	.asciz	"Xamarin.Forms.Platform.Android"
+	.size	.L.map_aname.14, 31
 
 	.section	.rodata.map_aname.15,"aMS",@progbits,1
 	.type	.L.map_aname.15, @object
 .L.map_aname.15:
-	.asciz	"Xamarin.AndroidX.Lifecycle.Common"
-	.size	.L.map_aname.15, 34
+	.asciz	"framecontroller.Android"
+	.size	.L.map_aname.15, 24
 
 	.section	.rodata.map_aname.16,"aMS",@progbits,1
 	.type	.L.map_aname.16, @object
 .L.map_aname.16:
-	.asciz	"Xamarin.Forms.Platform.Android"
-	.size	.L.map_aname.16, 31
+	.asciz	"Xamarin.AndroidX.Activity"
+	.size	.L.map_aname.16, 26
 
 	.section	.rodata.map_aname.17,"aMS",@progbits,1
 	.type	.L.map_aname.17, @object
 .L.map_aname.17:
-	.asciz	"Xamarin.AndroidX.Activity"
-	.size	.L.map_aname.17, 26
+	.asciz	"Plugin.BLE"
+	.size	.L.map_aname.17, 11
 
 	.section	.rodata.map_aname.18,"aMS",@progbits,1
 	.type	.L.map_aname.18, @object
 .L.map_aname.18:
-	.asciz	"Plugin.BLE"
-	.size	.L.map_aname.18, 11
+	.asciz	"Xamarin.AndroidX.DrawerLayout"
+	.size	.L.map_aname.18, 30
 
 	.section	.rodata.map_aname.19,"aMS",@progbits,1
 	.type	.L.map_aname.19, @object
 .L.map_aname.19:
-	.asciz	"Xamarin.AndroidX.DrawerLayout"
-	.size	.L.map_aname.19, 30
+	.asciz	"Xamarin.Google.Guava.ListenableFuture"
+	.size	.L.map_aname.19, 38
 
 	.section	.rodata.map_aname.20,"aMS",@progbits,1
 	.type	.L.map_aname.20, @object
 .L.map_aname.20:
-	.asciz	"Xamarin.Google.Guava.ListenableFuture"
-	.size	.L.map_aname.20, 38
+	.asciz	"Xamarin.AndroidX.RecyclerView"
+	.size	.L.map_aname.20, 30
 
 	.section	.rodata.map_aname.21,"aMS",@progbits,1
 	.type	.L.map_aname.21, @object
 .L.map_aname.21:
-	.asciz	"Xamarin.AndroidX.RecyclerView"
-	.size	.L.map_aname.21, 30
+	.asciz	"Acr.UserDialogs"
+	.size	.L.map_aname.21, 16
 
 	.section	.rodata.map_aname.22,"aMS",@progbits,1
 	.type	.L.map_aname.22, @object
 .L.map_aname.22:
-	.asciz	"Acr.UserDialogs"
-	.size	.L.map_aname.22, 16
+	.asciz	"AndHUD"
+	.size	.L.map_aname.22, 7
 
 	.section	.rodata.map_aname.23,"aMS",@progbits,1
 	.type	.L.map_aname.23, @object
 .L.map_aname.23:
-	.asciz	"AndHUD"
-	.size	.L.map_aname.23, 7
+	.asciz	"Xamarin.AndroidX.CardView"
+	.size	.L.map_aname.23, 26
 
 	.section	.rodata.map_aname.24,"aMS",@progbits,1
 	.type	.L.map_aname.24, @object
 .L.map_aname.24:
-	.asciz	"Xamarin.AndroidX.CardView"
-	.size	.L.map_aname.24, 26
+	.asciz	"Mono.Android"
+	.size	.L.map_aname.24, 13
 
 	.section	.rodata.map_aname.25,"aMS",@progbits,1
 	.type	.L.map_aname.25, @object
