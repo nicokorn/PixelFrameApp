@@ -266,7 +266,7 @@ namespace framecontroller.ViewModels
         {
             try
             {
-                await adapter.ConnectToKnownDeviceAsync(Guid.Parse(device.Id), new ConnectParameters(autoConnect: true, forceBleTransport: true));
+                device.Device = await adapter.ConnectToKnownDeviceAsync(Guid.Parse(device.Id), new ConnectParameters(autoConnect: true, forceBleTransport: true));
                 connectedDevice = device;
                 Application.Current.Properties["deviceId"] = device.Id;
                 Application.Current.Properties["deviceName"] = device.Name;

@@ -322,17 +322,18 @@ namespace framecontroller.ViewModels
             adapter = CrossBluetoothLE.Current.Adapter;
             connectedDevice = BaseViewModel.connectedDevice;
 
-            if(connectedDevice.IDeviceNull!=false)
-            {
-                var connectedDevices = adapter.GetSystemConnectedOrPairedDevices();
-                foreach( var device in connectedDevices )
-                {
-                    if( connectedDevice.Id.Equals(device.Id.ToString()) )
-                    {
-                        connectedDevice.Device = device;
-                    }
-                }
-            }
+            //if(connectedDevice.IDeviceNull!=false)
+            //{
+            //    var connectedDevices = adapter.GetSystemConnectedOrPairedDevices();
+            //    foreach( var device in connectedDevices )
+            //    {
+            //        if( connectedDevice.Id.Equals(device.Id.ToString()) )
+            //        {
+            //            connectedDevice.Device = device;
+            //            connectedDevice.IDeviceNull = false;
+            //        }
+            //    }
+            //}
 
             _pixel = new ObservableCollection<Pixel>();
 
@@ -364,7 +365,7 @@ namespace framecontroller.ViewModels
         {
             try
             {
-                // get uv service
+                // get frame service
                 UUID_WS2812B_SERVICE = await connectedDevice.Device.GetServiceAsync(Guid.Parse(UUID_WS2812B_SERVICE_UID));
                 Debug.WriteLine("Frame service loaded.");
             }
