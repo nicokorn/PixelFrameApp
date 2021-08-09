@@ -10,9 +10,8 @@ using System.Threading.Tasks;
 namespace framecontroller.Models
 {
     [JsonObject(MemberSerialization.OptOut)]
-    public class NativeDevice:IDevice
+    public class NativeDevice
     {
-        //[JsonIgnoreAttribute]
         [JsonConverter(typeof(NativeDeviceConverter))]
         public IDevice Device;
 
@@ -22,54 +21,11 @@ namespace framecontroller.Models
 
         public string Rssi { get; set; }
 
-        Guid IDevice.Id => Device.Id;
-
-        int IDevice.Rssi => Device.Rssi;
-
-        object IDevice.NativeDevice => Device.NativeDevice;
-
-        public DeviceState State => Device.State;
-
-        [JsonIgnore]
-        public IList<AdvertisementRecord> AdvertisementRecords => Device.AdvertisementRecords;
+        public bool IDeviceNull { get; set; }
 
         public override string ToString()
         {
             return "Name: " + this.Name + ", Id: " + this.Id + ", RSSI: " + this.Rssi;
-        }
-
-        public Task<IReadOnlyList<IService>> GetServicesAsync(CancellationToken cancellationToken = default)
-        {
-            return Device.GetServicesAsync(cancellationToken);
-        }
-
-        public Task<IService> GetServiceAsync(Guid id, CancellationToken cancellationToken = default)
-        {
-            return Device.GetServiceAsync(id, cancellationToken);
-        }
-
-        public Task<bool> UpdateRssiAsync()
-        {
-            return Device.UpdateRssiAsync();
-        }
-
-        public Task<int> RequestMtuAsync(int requestValue)
-        {
-            return Device.RequestMtuAsync(requestValue);
-        }
-
-        public bool UpdateConnectionInterval(ConnectionInterval interval)
-        {
-            return Device.UpdateConnectionInterval(interval);
-        }
-
-        public void Dispose()
-        {
-            Device.Dispose();
-        }
-
-        public NativeDevice()
-        {
         }
 
         [JsonConstructor]
@@ -94,6 +50,27 @@ namespace framecontroller.Models
             {
                 Rssi = "Error";
             }
+
+            IDeviceNull = false;
+        }
+
+        public NativeDevice(string deviceId, string deviceName)
+        {
+            Id = deviceId;
+            if (Id == null)
+            {
+                Id = "No id";
+            }
+
+            Name = deviceName;
+            if (Name == null)
+            {
+                Name = "No Name";
+            }
+
+            Rssi = "0";
+
+            IDeviceNull = true;
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using framecontroller.Models;
 using Plugin.BLE;
+using Plugin.BLE.Abstractions;
 using Plugin.BLE.Abstractions.Contracts;
 using SkiaSharp;
 using System;
@@ -321,6 +322,18 @@ namespace framecontroller.ViewModels
             adapter = CrossBluetoothLE.Current.Adapter;
             connectedDevice = BaseViewModel.connectedDevice;
 
+            if(connectedDevice.IDeviceNull!=false)
+            {
+                var connectedDevices = adapter.GetSystemConnectedOrPairedDevices();
+                foreach( var device in connectedDevices )
+                {
+                    if( connectedDevice.Id.Equals(device.Id.ToString()) )
+                    {
+                        connectedDevice.Device = device;
+                    }
+                }
+            }
+
             _pixel = new ObservableCollection<Pixel>();
 
             PictureCommand = new Command(() => selectPicture());
@@ -353,6 +366,7 @@ namespace framecontroller.ViewModels
             {
                 // get uv service
                 UUID_WS2812B_SERVICE = await connectedDevice.Device.GetServiceAsync(Guid.Parse(UUID_WS2812B_SERVICE_UID));
+                Debug.WriteLine("Frame service loaded.");
             }
             catch (Exception ex)
             {
@@ -372,8 +386,8 @@ namespace framecontroller.ViewModels
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex.Message, "Error while discovering characteristics");
-                await App.Current.MainPage.DisplayAlert("Error", "Error while discovering characteristics", "OK");
+                Debug.WriteLine("Error while discovering characteristics: "+ ex.Message);
+                await App.Current.MainPage.DisplayAlert("Error", "Error while discovering characteristics: " + ex.Message, "OK");
             }
 
             try
@@ -426,8 +440,26 @@ namespace framecontroller.ViewModels
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex.Message, "Error while reading characteristics");
-                await App.Current.MainPage.DisplayAlert("Error", "Error while reading characteristics", "OK");
+                Debug.WriteLine("Error while reading characteristics: " + ex.Message);
+                await App.Current.MainPage.DisplayAlert("Error", "Error while reading characteristics: " + ex.Message, "OK");
+            }
+        }
+
+        private async void ConnectDeviceAsync(NativeDevice device, bool showPrompt = true)
+        {
+            try
+            {
+                await adapter.ConnectToDeviceAsync(device.Device, new ConnectParameters(autoConnect: true, forceBleTransport: true));
+                connectedDevice = device;
+                Application.Current.Properties["deviceId"] = device.Id;
+                Application.Current.Properties["deviceName"] = device.Name;
+                await Application.Current.SavePropertiesAsync();
+                Debug.WriteLine($"Connected to {device.Device.Name}.");
+
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message, "Connection error: " + ex.Message);
             }
         }
     }

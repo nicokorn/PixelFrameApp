@@ -8,30 +8,30 @@ using System.Text;
 
 namespace framecontroller.Helper
 {
-    public class NativeDeviceConverter : JsonConverter
+    public class NativeDeviceConverter //: JsonConverter
     {
-        public override bool CanWrite => false;
-        public override bool CanRead => true;
-        public override bool CanConvert(Type objectType)
-        {
-            return objectType == typeof(IDevice);
-        }
-        public override void WriteJson(JsonWriter writer,
-            object value, JsonSerializer serializer)
-        {
-            throw new InvalidOperationException("Use default serialization.");
-        }
-        
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-        {
-            var jsonObject = JObject.Load(reader);
-
-            var device = default(IDevice);
-
-            device = new NativeDevice();
-            serializer.Populate(jsonObject.CreateReader(), device);  // triggers exceptiom
-            return device;
-        }
+        //public override bool CanWrite => false;
+        //public override bool CanRead => true;
+        //public override bool CanConvert(Type objectType)
+        //{
+        //    return objectType == typeof(IDevice);
+        //}
+        //public override void WriteJson(JsonWriter writer,
+        //    object value, JsonSerializer serializer)
+        //{
+        //    throw new InvalidOperationException("Use default serialization.");
+        //}
+        //
+        //public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        //{
+        //    var jsonObject = JObject.Load(reader);
+        //
+        //    var device = default(IDevice);
+        //
+        //    device = new NativeDevice();
+        //    serializer.Populate(jsonObject.CreateReader(), device);  // triggers exceptiom
+        //    return device;
+        //}
 
 
 

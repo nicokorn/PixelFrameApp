@@ -132,23 +132,12 @@ namespace framecontroller.ViewModels
 
         private void Adapter_ScanTimeoutElapsed(object sender, EventArgs e)
         {
-            if (Application.Current.Properties.ContainsKey("storedDevice"))
+            if (Application.Current.Properties.ContainsKey("deviceId")&& Application.Current.Properties.ContainsKey("deviceName"))
             {
-                string deviceJSon = Application.Current.Properties["storedDevice"] as string;
-                NativeDevice storedDevice = JsonConvert.DeserializeObject<NativeDevice>(deviceJSon);
-
-                // do something with id
-                try
-                {
-                    if (storedDevice.Device != null)
-                    {
-                        _items.Add(new NativeDevice(storedDevice.Device));
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Debug.WriteLine("Key found in properties but the object is null!");
-                }
+                string deviceId = Application.Current.Properties["deviceId"] as string;
+                string deviceName = Application.Current.Properties["deviceName"] as string;
+                NativeDevice stored = new NativeDevice(deviceId, deviceName);
+                _items.Add(stored);
             }
 
             Debug.WriteLine("Timeout!");
@@ -231,12 +220,25 @@ namespace framecontroller.ViewModels
             }
             controlsEnabled(false);
             await App.Current.MainPage.DisplayAlert("Connecting", "Connecting to device.", "OK");
-            if ( await ConnectDeviceAsync(device) )
+            if(device.IDeviceNull==false)
             {
-                Debug.WriteLine("Connected!");
-                BaseViewModel.connectedDevice=device;
-                await this.navigation.PushAsync(new DeviceView());
-                controlsEnabled(true);
+                if (await ConnectDeviceAsync(device))
+                {
+                    Debug.WriteLine("Connected!");
+                    BaseViewModel.connectedDevice = device;
+                    await this.navigation.PushAsync(new DeviceView());
+                    controlsEnabled(true);
+                }
+            }
+            else
+            {
+                if (await ConnectToIdDeviceAsync(device))
+                {
+                    Debug.WriteLine("Connected!");
+                    BaseViewModel.connectedDevice = device;
+                    await this.navigation.PushAsync(new DeviceView());
+                    controlsEnabled(true);
+                }
             }
         }
 
@@ -246,16 +248,8 @@ namespace framecontroller.ViewModels
             {
                 await adapter.ConnectToDeviceAsync(device.Device, new ConnectParameters(autoConnect: true, forceBleTransport: true));
                 connectedDevice = device;
-                string deviceJSon = JsonConvert.SerializeObject(device,
-                        new JsonSerializerSettings()
-                        {
-                            ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
-                            //NullValueHandling = NullValueHandling.Ignore,
-                            //Formatting = Formatting.Indented,
-                            //TypeNameHandling = TypeNameHandling.All
-                        });
-                Debug.WriteLine("Size of the serialized NativeDevice: " + deviceJSon.Length);
-                Application.Current.Properties["storedDevice"] = deviceJSon;
+                Application.Current.Properties["deviceId"] = device.Id;
+                Application.Current.Properties["deviceName"] = device.Name;
                 await Application.Current.SavePropertiesAsync();
                 Debug.WriteLine($"Connected to {device.Device.Name}.");
                 return true;
@@ -264,6 +258,26 @@ namespace framecontroller.ViewModels
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message, "Connection error: "+ ex.Message);
+                return false;
+            }
+        }
+
+        private async Task<bool> ConnectToIdDeviceAsync(NativeDevice device, bool showPrompt = true)
+        {
+            try
+            {
+                await adapter.ConnectToKnownDeviceAsync(Guid.Parse(device.Id), new ConnectParameters(autoConnect: true, forceBleTransport: true));
+                connectedDevice = device;
+                Application.Current.Properties["deviceId"] = device.Id;
+                Application.Current.Properties["deviceName"] = device.Name;
+                await Application.Current.SavePropertiesAsync();
+                Debug.WriteLine($"Connected to {device.Name}.");
+                return true;
+
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message, "Connection error: " + ex.Message);
                 return false;
             }
         }
