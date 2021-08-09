@@ -135,16 +135,20 @@ namespace framecontroller.ViewModels
             if (Application.Current.Properties.ContainsKey("storedDevice"))
             {
                 string deviceJSon = Application.Current.Properties["storedDevice"] as string;
-                NativeDevice storedDevice = JsonConvert.DeserializeObject<NativeDevice>(deviceJSon, 
-                    new JsonSerializerSettings()
-                    {
-                        //ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
-                        TypeNameHandling = TypeNameHandling.Auto,
-                        NullValueHandling = NullValueHandling.Ignore
-                    });
+                NativeDevice storedDevice = JsonConvert.DeserializeObject<NativeDevice>(deviceJSon);
 
                 // do something with id
-                _items.Add(new NativeDevice(storedDevice.Device));
+                try
+                {
+                    if (storedDevice.Device != null)
+                    {
+                        _items.Add(new NativeDevice(storedDevice.Device));
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("Key found in properties but the object is null!");
+                }
             }
 
             Debug.WriteLine("Timeout!");
@@ -187,7 +191,7 @@ namespace framecontroller.ViewModels
             }
             catch (Exception ex)
             {
-                Debug.WriteLine("Error Scan!: "+ex.Message);
+                Debug.WriteLine("Error Scan!: "+ex.Message + ", " + ex.StackTrace);
             }
         }
 
@@ -242,14 +246,15 @@ namespace framecontroller.ViewModels
             {
                 await adapter.ConnectToDeviceAsync(device.Device, new ConnectParameters(autoConnect: true, forceBleTransport: true));
                 connectedDevice = device;
-                var deviceJSon = JsonConvert.SerializeObject(device, typeof(NativeDevice), Formatting.None,
+                string deviceJSon = JsonConvert.SerializeObject(device,
                         new JsonSerializerSettings()
                         {
                             ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
-                            NullValueHandling = NullValueHandling.Ignore,
-                            Formatting = Formatting.Indented,
-                            TypeNameHandling = TypeNameHandling.Auto
+                            //NullValueHandling = NullValueHandling.Ignore,
+                            //Formatting = Formatting.Indented,
+                            //TypeNameHandling = TypeNameHandling.All
                         });
+                Debug.WriteLine("Size of the serialized NativeDevice: " + deviceJSon.Length);
                 Application.Current.Properties["storedDevice"] = deviceJSon;
                 await Application.Current.SavePropertiesAsync();
                 Debug.WriteLine($"Connected to {device.Device.Name}.");

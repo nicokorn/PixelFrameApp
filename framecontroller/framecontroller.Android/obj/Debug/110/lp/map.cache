@@ -3,6 +3,7 @@ AndHUD.dll
 ColorPicker.Android.dll
 FormsViewGroup.dll
 Plugin.BLE.dll
+Plugin.Settings.dll
 SkiaSharp.dll
 SkiaSharp.Views.Android.dll
 SkiaSharp.Views.Forms.dll

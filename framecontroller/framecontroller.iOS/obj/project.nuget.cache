@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "46St7woyFc3CiNT/wFv1nDPVzs8qGeyQlnargmf4Ivl3hpWvjNoppz2+4BYlItCVHsLr6U+cqYMk9G2PfFz8xg==",
+  "dgSpecHash": "W9Ghi9KUBf8RBjeoORdmzM70wP4UEsGS2H2NSk2tjlPang5CvqwJLOOC/mLg07GDD/fJefijH0S6d8zcWwSADw==",
   "success": true,
   "projectFilePath": "C:\\Users\\nico1\\OneDrive\\Documents\\GitHub\\XAMARIN_WS2812B\\framecontroller\\framecontroller.iOS\\framecontroller.iOS.csproj",
   "expectedPackageFiles": [
@@ -16,6 +16,7 @@
     "C:\\Users\\nico1\\.nuget\\packages\\skiasharp.views.forms\\1.68.3\\skiasharp.views.forms.1.68.3.nupkg.sha512",
     "C:\\Users\\nico1\\.nuget\\packages\\system.drawing.common\\5.0.2\\system.drawing.common.5.0.2.nupkg.sha512",
     "C:\\Users\\nico1\\.nuget\\packages\\system.numerics.vectors\\4.5.0\\system.numerics.vectors.4.5.0.nupkg.sha512",
+    "C:\\Users\\nico1\\.nuget\\packages\\xam.plugins.settings\\3.1.1\\xam.plugins.settings.3.1.1.nupkg.sha512",
     "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\xamarin.essentials\\1.6.1\\xamarin.essentials.1.6.1.nupkg.sha512",
     "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\xamarin.forms\\5.0.0.2012\\xamarin.forms.5.0.0.2012.nupkg.sha512"
   ],
