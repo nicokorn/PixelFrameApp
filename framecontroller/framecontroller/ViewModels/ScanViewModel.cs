@@ -127,19 +127,25 @@ namespace framecontroller.ViewModels
         private void OnDeviceDiscovered(object sender, DeviceEventArgs args)
         {
             Debug.WriteLine("Discovered a device!");
-            _items.Add(new NativeDevice(args.Device));
+            bool deviceStored = false;
+            for( int i=0; i<_items.Count; i++ )
+            {
+                if(_items[i].Id.Equals(args.Device.Id.ToString()) )
+                {
+                    _items[i] = new NativeDevice(args.Device);
+                    deviceStored = true;
+                    break;
+                }
+            }
+
+            if( deviceStored != true )
+            {
+                _items.Add(new NativeDevice(args.Device));
+            }
         }
 
         private void Adapter_ScanTimeoutElapsed(object sender, EventArgs e)
         {
-            if (Application.Current.Properties.ContainsKey("deviceId")&& Application.Current.Properties.ContainsKey("deviceName"))
-            {
-                string deviceId = Application.Current.Properties["deviceId"] as string;
-                string deviceName = Application.Current.Properties["deviceName"] as string;
-                NativeDevice stored = new NativeDevice(deviceId, deviceName);
-                _items.Add(stored);
-            }
-
             Debug.WriteLine("Timeout!");
             Debug.WriteLine("Item count: " + _items.Count);
             controlsEnabled(true);
@@ -175,6 +181,14 @@ namespace framecontroller.ViewModels
                 //We have to test if the device is scanning 
                 if (!ble.Adapter.IsScanning)
                 {
+                    if (Application.Current.Properties.ContainsKey("deviceId") && Application.Current.Properties.ContainsKey("deviceName"))
+                    {
+                        string deviceId = Application.Current.Properties["deviceId"] as string;
+                        string deviceName = Application.Current.Properties["deviceName"] as string;
+                        NativeDevice stored = new NativeDevice(deviceId, deviceName);
+                        _items.Add(stored);
+                    }
+
                     await adapter.StartScanningForDevicesAsync();
                 }
             }

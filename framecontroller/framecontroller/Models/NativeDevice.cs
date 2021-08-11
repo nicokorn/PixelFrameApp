@@ -1,18 +1,10 @@
-﻿using framecontroller.Helper;
-using Newtonsoft.Json;
-using Plugin.BLE.Abstractions;
+﻿using Newtonsoft.Json;
 using Plugin.BLE.Abstractions.Contracts;
-using System;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace framecontroller.Models
 {
-    [JsonObject(MemberSerialization.OptOut)]
     public class NativeDevice
     {
-        [JsonConverter(typeof(NativeDeviceConverter))]
         public IDevice Device;
 
         public string Id { get; set; }
