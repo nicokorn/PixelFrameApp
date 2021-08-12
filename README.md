@@ -5,6 +5,7 @@ This is the application code for the FrameController App for Android programmed 
 <body>
 
 <h2>Pictures/vids of the pixel frame</h2>
+Short demo on youtube: https://www.youtube.com/watch?v=DLWldU1EluU
 <img src="https://github.com/nicokorn/NRF52840_WS2812B_BLE/blob/main/docs/20210811_175008.jpg" alt="px1">
 <img src="https://github.com/nicokorn/NRF52840_WS2812B_BLE/blob/main/docs/20210811_175349.jpg" alt="px2">
 <img src="https://github.com/nicokorn/NRF52840_WS2812B_BLE/blob/main/docs/Screenshot_20210811-180451.jpg" alt="px3">
