@@ -1,5 +1,5 @@
 # PixelFrame Application
-Application code for the FrameController App. The app is used to control the PixelFrame which is in a seperate repo: https://github.com/nicokorn/PixelFrameFW
+This is the application code for the FrameController App for Android programmed with the xamarin framework. The app is used to control the PixelFrame which is in a seperate repo: https://github.com/nicokorn/PixelFrameFW. The app searches for Pixel Frames and lets connect to it. Connected to the frame it is possible to send pictures from the mobile phone to the Pixel Frame and it is possible to manipulate the send picture in realitme.
 
 <html>
 <body>
