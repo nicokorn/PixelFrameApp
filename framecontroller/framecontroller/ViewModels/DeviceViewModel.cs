@@ -174,16 +174,34 @@ namespace framecontroller.ViewModels
             int size;
             SKColor pixelSKColor;
             int counter;
-            int xDelta = 0;
-            int yDelta = 0;
+            int xDelta;
+            int yDelta;
+            int xStart;
+            int yStart;
 
             // parse picture into the frames resolution
             xDelta = picture.Width / col;
             yDelta = picture.Height / row;
-            counter = 0;
-            for ( int y=yDelta/2; y<picture.Height; y+=yDelta )
+            if(picture.Width %2 != 0)
             {
-                for ( int x=xDelta/2; x<picture.Width; x+=xDelta )
+                xStart = xDelta / 2;
+            }
+            else
+            {
+                xStart = xDelta;
+            }
+            if(picture.Height % 2 != 0)
+            {
+                yStart = yDelta / 2;
+            }
+            else
+            {
+                yStart = yDelta;
+            }
+            counter = 0;
+            for ( int y=yStart; y<picture.Height; y+=yDelta )
+            {
+                for ( int x=xStart; x<picture.Width; x+=xDelta )
                 {
                     if( x>=picture.Width || y>=picture.Height || counter>=_pixel.Count )
                     {
@@ -321,19 +339,6 @@ namespace framecontroller.ViewModels
             ble = CrossBluetoothLE.Current;
             adapter = CrossBluetoothLE.Current.Adapter;
             connectedDevice = BaseViewModel.connectedDevice;
-
-            //if(connectedDevice.IDeviceNull!=false)
-            //{
-            //    var connectedDevices = adapter.GetSystemConnectedOrPairedDevices();
-            //    foreach( var device in connectedDevices )
-            //    {
-            //        if( connectedDevice.Id.Equals(device.Id.ToString()) )
-            //        {
-            //            connectedDevice.Device = device;
-            //            connectedDevice.IDeviceNull = false;
-            //        }
-            //    }
-            //}
 
             _pixel = new ObservableCollection<Pixel>();
 
