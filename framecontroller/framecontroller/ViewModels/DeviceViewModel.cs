@@ -176,32 +176,18 @@ namespace framecontroller.ViewModels
             int counter;
             int xDelta;
             int yDelta;
-            int xStart;
-            int yStart;
+            int x;
+            int y;
 
             // parse picture into the frames resolution
             xDelta = picture.Width / col;
             yDelta = picture.Height / row;
-            if(picture.Width %2 != 0)
-            {
-                xStart = xDelta / 2;
-            }
-            else
-            {
-                xStart = xDelta;
-            }
-            if(picture.Height % 2 != 0)
-            {
-                yStart = yDelta / 2;
-            }
-            else
-            {
-                yStart = yDelta;
-            }
             counter = 0;
-            for ( int y=yStart; y<picture.Height; y+=yDelta )
+            y = yDelta / 2;
+            for ( int rowNr=0; rowNr < row; rowNr++ )
             {
-                for ( int x=xStart; x<picture.Width; x+=xDelta )
+                x = xDelta / 2;
+                for ( int colNr=0; colNr < col; colNr++ )
                 {
                     if( x>=picture.Width || y>=picture.Height || counter>=_pixel.Count )
                     {
@@ -216,7 +202,9 @@ namespace framecontroller.ViewModels
                     pictureParsed[counter * 3 + 1] /= DIM;
                     pictureParsed[counter * 3 + 2] /= DIM;
                     counter++;
+                    x += xDelta;
                 }
+                y += yDelta;
             }
 
             try
