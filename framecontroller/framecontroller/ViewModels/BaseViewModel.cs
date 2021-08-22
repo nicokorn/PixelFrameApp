@@ -48,7 +48,7 @@ namespace framecontroller.ViewModels
         protected const int CMD_BIT_REFRESH = 0x01;
         protected const int CMD_BIT_CLEARALL = 0x02;
 
-        protected const int DIM = 8;
+        protected const int DIM = 2;
 
         protected void RaisePropertyChanged([CallerMemberName] string caller = "")
         {
